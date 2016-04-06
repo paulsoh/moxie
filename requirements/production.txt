@@ -9,3 +9,4 @@ django-pipeline
 django-storages-redux
 boto
 requests
+django-summernote
