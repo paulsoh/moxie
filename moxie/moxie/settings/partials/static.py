@@ -21,13 +21,13 @@ PIPELINE = {
     'STYLESHEETS': {
         'vendor': {
             'source_filenames': (
-              'moxie/css/*.css',
+              'css/*.css',
             ),
             'output_filename': 'css/vendor.css',
         },
-        'main': {
+        'moxie': {
             'source_filenames': (
-              'vanityfair/css/*.sass',
+              'css/moxie.sass',
             ),
             'output_filename': 'css/moxie.min.css',
         },
@@ -36,13 +36,13 @@ PIPELINE = {
     'JAVASCRIPT': {
         'vendor': {
             'source_filenames': (
-              'vanityfair/js/*.js',
+              'js/*.js',
             ),
             'output_filename': 'js/vendor.js',
         },
-        'main': {
+        'moxie': {
             'source_filenames': (
-              'vanityfair/js/*.js',
+              'js/myApp.js',
             ),
             'output_filename': 'js/main.js',
         },

@@ -28,6 +28,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'pipeline',
+
+    'moxie',
 ]
 
 MIDDLEWARE_CLASSES = [
