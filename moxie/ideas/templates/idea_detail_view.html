@@ -1,3 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
 <h1>This is the detail view</h1>
 {{ idea.title }}
 {{ idea.description|safe }}
@@ -5,3 +9,6 @@
 {{ idea.sales_goal }}
 {{ idea.custom_slug }}
 {{ idea.end_date }}
+{% load crispy_forms_tags %}
+
+{% endblock %}
