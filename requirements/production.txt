@@ -10,3 +10,4 @@ django-storages-redux
 boto
 requests
 django-summernote
+django-crispy-forms

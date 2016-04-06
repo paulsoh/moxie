@@ -29,6 +29,7 @@ INSTALLED_APPS = [
 
     'pipeline',
     'django_summernote',
+    'crispy_forms',
 
     'moxie',
     'ideas',
