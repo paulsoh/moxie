@@ -64,3 +64,6 @@ target/
 #Backup files
 *.swp
 *.swo
+
+#Vendor js/css/sass files
+vendor/

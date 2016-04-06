@@ -19,15 +19,10 @@ STATICFILES_FINDERS = (
 
 PIPELINE = {
     'STYLESHEETS': {
-        'vendor': {
-            'source_filenames': (
-              'css/*.css',
-            ),
-            'output_filename': 'css/vendor.css',
-        },
         'moxie': {
             'source_filenames': (
-              'css/moxie.sass',
+                'sass/vendor/stylesheets/bootstrap_moxie.sass',
+                'sass/moxie.sass',
             ),
             'output_filename': 'css/moxie.min.css',
         },
@@ -36,7 +31,8 @@ PIPELINE = {
     'JAVASCRIPT': {
         'vendor': {
             'source_filenames': (
-              'js/*.js',
+              'js/vendor/jquery-1.12.2.min.js',
+              'js/vendor/bootstrap.js',
             ),
             'output_filename': 'js/vendor.js',
         },
@@ -52,3 +48,5 @@ PIPELINE = {
         'pipeline.compilers.sass.SASSCompiler',
     }
 }
+
+PIPELINE['JS_COMPRESSOR'] = 'pipeline.compressors.NoopCompressor'
