@@ -11,6 +11,8 @@ class IdeaModelAdmin(admin.ModelAdmin):
 
         'description',
         'price',
-        'social_score',
+        '_social_score',
         'sales_goal',
+        '_created_at',
+        '_updated_at',
     )
