@@ -1,0 +1,21 @@
+{% load pipeline %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>{% block title %}Home{% endblock %}::Moxie lab</title>
+    {% stylesheet 'moxie' %}
+    {% javascript 'vendor' %}
+    {% javascript 'moxie' %}
+</head>
+<body class="container">
+    {% include 'partials/header.html' %} 
+    <main>
+        {% block content %} 
+        {% endblock %}
+    </main>
+    {% include 'partials/footer.html' %} 
+</body>
+</html>
