@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'pipeline',
     'django_summernote',
     'crispy_forms',
+    'social.apps.django_app.default',
 
     'moxie',
     'ideas',

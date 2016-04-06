@@ -11,3 +11,4 @@ boto
 requests
 django-summernote
 django-crispy-forms
+python-social-auth
