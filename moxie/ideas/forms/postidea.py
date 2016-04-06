@@ -1,9 +1,21 @@
-from django import forms
+from django.forms import ModelForm
 
-from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
+from django_summernote.widgets import SummernoteInplaceWidget
+
+from ideas.models import Idea
 
 
-class PostIdeaForm(forms.Form):
-    description_input = forms.CharField(
-        widget=SummernoteInplaceWidget(),
-    )
+class PostIdeaForm(ModelForm):
+    class Meta:
+        model = Idea
+        fields = [
+            'title',
+            'description',
+            'price',
+            'sales_goal',
+            'custom_slug',
+            'end_date',
+        ]
+        widgets = {
+            'description': SummernoteInplaceWidget(),
+        }
