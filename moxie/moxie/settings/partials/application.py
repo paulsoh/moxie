@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'pipeline',
 
     'moxie',
+    'ideas',
 ]
 
 MIDDLEWARE_CLASSES = [
