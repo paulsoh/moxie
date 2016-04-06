@@ -1,10 +1,11 @@
 from django.contrib import admin
+from django_summernote.admin import SummernoteModelAdmin
 
 from ideas.models import Idea
 
 
 @admin.register(Idea)
-class IdeaModelAdmin(admin.ModelAdmin):
+class IdeaModelAdmin(SummernoteModelAdmin):
 
     list_display = admin.ModelAdmin.list_display + (
         'title',
