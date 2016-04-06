@@ -1,0 +1,11 @@
+Django==1.9.4
+Pillow
+hashids
+djangorestframework
+psycopg2
+dj-database-url
+raven
+django-pipeline
+django-storages-redux
+boto
+requests
