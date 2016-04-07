@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <title>{% block title %}Home{% endblock %}::Moxie lab</title>
+    {% stylesheet 'vendor' %}
     {% stylesheet 'moxie' %}
     {% javascript 'vendor' %}
-    {% javascript 'moxie' %}
 </head>
 <body>
     {% include 'partials/header.html' %} 
@@ -17,5 +17,6 @@
         {% endblock %}
     </main>
     {% include 'partials/footer.html' %} 
+    {% javascript 'moxie' %}
 </body>
 </html>

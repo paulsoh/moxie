@@ -19,9 +19,14 @@ STATICFILES_FINDERS = (
 
 PIPELINE = {
     'STYLESHEETS': {
+        'vendor': {
+            'source_filenames': (
+                'css/vendor/bootstrap.min.css',
+            ),
+            'output_filename': 'css/bootstrap.min.css',
+        },
         'moxie': {
             'source_filenames': (
-                'sass/vendor/stylesheets/bootstrap_moxie.sass',
                 'sass/moxie.sass',
             ),
             'output_filename': 'css/moxie.min.css',

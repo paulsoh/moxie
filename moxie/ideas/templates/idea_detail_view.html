@@ -2,13 +2,26 @@
 
 {% block content %}
 
-<h1>This is the detail view</h1>
-{{ idea.title }}
-{{ idea.description|safe }}
-{{ idea.price }}
-{{ idea.sales_goal }}
-{{ idea.custom_slug }}
-{{ idea.end_date }}
-{% load crispy_forms_tags %}
+<div class="row">
+    <div class="col-xs-12">
+        <h1> {{ idea.title }} </h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-md-8">
+        {{ idea.description|safe }}
+        {{ idea.custom_slug }}
+    </div>
+    <div class="col-xs-12 col-md-4">
+        <p>Price: {{ idea.price }}</p>
+        <p>Sales goal: {{ idea.sales_goal }}</p>
+        <p>End date: {{ idea.end_date }}</p>
+        
+        
+        
+    </div>
+</div>
+
 
 {% endblock %}
