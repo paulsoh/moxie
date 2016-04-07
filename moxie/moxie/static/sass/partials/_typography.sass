@@ -1,0 +1,24 @@
+h1, h2, h3, h4, h5, h6
+  font-family: $font-family-sans-serif
+  text-transform: uppercase
+  letter-spacing: 0.2rem
+  &.logo
+    font:
+      size: 1.5rem
+      weight: 700
+    text-transform: uppercase
+
+p, a
+  font:
+    family: $font-family-sans-serif
+    weight: 300
+  &.logo.navbar-brand
+    color: $primary-color
+    font:
+      size: 2.5rem
+      weight: 700
+    letter-spacing: 0.3rem
+    text-transform: uppercase
+    &:hover
+      color: darken($primary-color, 10%)
+
