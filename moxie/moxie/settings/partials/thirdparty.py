@@ -8,8 +8,8 @@ SUMMERNOTE_CONFIG = {
     'iframe': False,
 }
 
-# SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
-# SOCIAL_AUTH_URL_NAMESPACE = 'social'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/ideas/create/'
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
 # Facebook
 SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('FACEBOOK_KEY')
