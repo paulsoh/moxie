@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for idea in ideas %}
+<div>
+    {{idea.title}}
+</div>
+{% endfor %}
+
+{% endblock %}
