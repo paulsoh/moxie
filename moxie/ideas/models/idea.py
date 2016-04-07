@@ -11,6 +11,10 @@ class Idea(models.Model):
         max_length=60,
     )
 
+    thumbnail_image = models.ImageField(
+        upload_to="thumbnail_images",
+    )
+
     description = models.TextField()
 
     price = models.IntegerField()
