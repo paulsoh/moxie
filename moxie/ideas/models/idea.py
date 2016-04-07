@@ -1,6 +1,8 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 
+from django.contrib.auth.models import User
+
 
 class Idea(models.Model):
 
@@ -34,6 +36,12 @@ class Idea(models.Model):
 
     _updated_at = models.DateTimeField(
         auto_now=True,
+    )
+
+    fund_user_set = models.ManyToManyField(
+        User,
+        related_name='fund_idea_set',
+        through='Fund',
     )
 
     def _get_current_count(self):
