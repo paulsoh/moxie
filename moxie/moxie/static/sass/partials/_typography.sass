@@ -9,7 +9,7 @@ h1, h2, h3, h4, h5, h6
     text-transform: uppercase
 
 p, a
-  color: #222222
+  color: $secondary-color 
   font:
     family: $font-family-sans-serif
     weight: 300
@@ -22,4 +22,15 @@ p, a
     text-transform: uppercase
     &:hover
       color: darken($primary-color, 10%)
-
+a
+  color: $primary-color
+  &.btn
+    color: $m-white
+    &:hover, &:active, &:visited
+      color: $m-white
+  &:hover
+    color: darken($primary-color, 10%)
+  &:active
+    color: darken($primary-color, 10%)
+  &:visited
+    color: $primary-color

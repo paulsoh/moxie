@@ -1,7 +1,8 @@
 import os
 
 # django-crispy-forms settings
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
+# CRISPY_TEMPLATE_PACK = 'bootstrap3'
+CRISPY_FAIL_SILENTLY = not True
 
 # django-summernote settings
 SUMMERNOTE_CONFIG = {

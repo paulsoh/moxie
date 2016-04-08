@@ -1,27 +1,46 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1 class="m-detail-hero"> {{ idea.title }} </h1>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-8">
+                <div class="thumbnail m-detail-thumbnail">
+                    <img src="{{ idea.thumbnail_image.url }}" alt="{{idea.title}}"/>
+                </div>
+                {{ idea.description|safe }}
+                {{ idea.custom_slug }}
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <p> Funded by {{idea.get_current_funders}} </p>
+                        <p>Price: {{ idea.price }} /
+                        Sales goal: {{ idea.get_current_quantity }} /
+                        Sales goal: {{ idea.sales_goal }}</p>
+                        <p>End date: {{ idea.end_date }}</p>
+                        <div class="progress detail">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="{{idea.get_current_progress}}" aria-valuemin="0" aria-valuemax="100" style="width:{{idea.get_current_progress}}%;">
+                                <span class="sr-only">{{idea.get_current_progress}}% Complete</span>
+                            </div>
+                        </div>
+                        <a href="{% url 'home' %}" class="btn btn-primary" role="button">구매하기</a> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-<div class="row">
-    <div class="col-xs-12">
-        <h1> {{ idea.title }} </h1>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-xs-12 col-md-8">
-        {{ idea.description|safe }}
-        {{ idea.custom_slug }}
-    </div>
-    <div class="col-xs-12 col-md-4">
-        <p>Price: {{ idea.price }}</p>
-        <p>Sales goal: {{ idea.sales_goal }}</p>
-        <p>End date: {{ idea.end_date }}</p>
-        
-        
-        
-    </div>
-</div>
 
 
 {% endblock %}
