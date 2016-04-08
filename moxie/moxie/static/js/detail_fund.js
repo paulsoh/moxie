@@ -12,6 +12,11 @@
         $funder_cellphone = $('#funder_cellphone');
         $funder_quantity = $('#funder_quantity');
 
+        // update fields when funding happens
+        $current_funders = $('#current_funders');
+        $current_quantity = $('#current_quantity');
+        $current_progress = $('#current_progress');
+
         // settings for ajax - getting cookie
         function getCookie(name) {
             var cookieValue = null;
@@ -34,6 +39,12 @@
             return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
         }
         
+        function updateIdeaData(data){
+            $current_funders.html(data.get_current_funders)
+            $current_quantity.html(data.get_current_quantity)
+            $current_progress.attr('style', 'width:'+data.get_current_progress+"%")
+        }
+
         var csrftoken = getCookie('csrftoken');
 
         $.ajaxSetup({
@@ -57,7 +68,20 @@
                 data: data,             
             })
             .done(function(data, textStatus, jqXHR){
-                console.log("Http request suceeded: "+jqXHR.status, data);
+                // to get idea data
+                $funder_name.val('');
+                $funder_address.val('');
+                $funder_cellphone.val('');
+                $funder_quantity.val('');
+                $.ajax({
+                    url: "/ideas/explore/" + idea_id + "/fund/",
+                    type: "GET",
+                })
+                .done(function(data, textStatus, jqXHR){
+                    console.log("Http request suceeded: "+jqXHR.status, data);
+                    updateIdeaData(data)
+                })
+
             })
             .fail(function(jqXHR, textStatus, errorThrown){
                 console.log("Http request suceeded: "+jqXHR.status);

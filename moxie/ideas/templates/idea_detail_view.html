@@ -25,13 +25,16 @@
             <div class="col-xs-12 col-md-4">
                 <div class="thumbnail">
                     <div class="caption">
-                        <p> Funded by {{idea.get_current_funders}} </p>
+                        <div class="idea-user-info">
+                            <p> {{user.get_full_name}} </p>
+                        </div>
+                        <p> Funded by <span id="current_funders">{{idea.get_current_funders}}</span></p>
                         <p>Price: {{ idea.price }} /
-                        Current sales: {{ idea.get_current_quantity }} /
+                        Current sales: <span id="current_quantity">{{ idea.get_current_quantity }}</span> /
                         Sales goal: {{ idea.sales_goal }}</p>
                         <p>End date: {{ idea.end_date }}</p>
                         <div class="progress detail">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="{{idea.get_current_progress}}" aria-valuemin="0" aria-valuemax="100" style="width:{{idea.get_current_progress}}%;">
+                            <div class="progress-bar" role="progressbar" id="current_progress" aria-valuenow="{{idea.get_current_progress}}" aria-valuemin="0" aria-valuemax="100" style="width:{{idea.get_current_progress}}%;">
                                 <span class="sr-only">{{idea.get_current_progress}}% Complete</span>
                             </div>
                         </div>

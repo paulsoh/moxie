@@ -5,13 +5,16 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from ideas.models import Idea, Fund
-from api.ideas.serializers import FundIdeaSerializer
+from api.ideas.serializers import FundIdeaSerializer, IdeaSerializer
 
 
 class FundIdeaAPIView(APIView):
 
     def get(self, request, **kwargs):
-        pass
+        idea = Idea.objects.get(pk=kwargs.get('pk'))
+        serializer = IdeaSerializer(idea)
+
+        return Response(serializer.data)
 
     def post(self, request, **kwargs):
         data = request.data
