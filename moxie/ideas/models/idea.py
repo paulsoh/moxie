@@ -24,6 +24,8 @@ class Idea(models.Model):
     )
 
     custom_slug = models.SlugField(
+        allow_unicode=True,
+        max_length=255,
         blank=True,
         null=True,
     )
@@ -68,6 +70,6 @@ class Idea(models.Model):
         return reverse(
             'idea-detail',
             kwargs={
-                'pk': self.id,
+                'slug': self.custom_slug,
             }
         )
