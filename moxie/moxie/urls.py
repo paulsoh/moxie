@@ -1,5 +1,7 @@
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.conf.urls.static import static
+from django.conf import settings
 
 from moxie.views import HomeTemplateView
 from ideas.views import *
@@ -15,4 +17,7 @@ urlpatterns = [
 
     url(r'^admin/', admin.site.urls),
     url(r'^$', HomeTemplateView.as_view(), name="home"),
-]
+] + static(
+            settings.MEDIA_URL,
+            document_root=settings.MEDIA_ROOT
+    )
