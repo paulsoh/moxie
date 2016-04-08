@@ -50,11 +50,17 @@ PIPELINE = {
             ),
             'output_filename': 'js/main.js',
         },
+        'detail': {
+            'source_filenames': (
+              'js/detail_fund.js',
+            ),
+            'output_filename': 'js/detail_fund.js',
+        },
     },
 
     'COMPILERS': {
         'pipeline.compilers.sass.SASSCompiler',
-    }
+    },
 }
 
 PIPELINE['JS_COMPRESSOR'] = 'pipeline.compressors.NoopCompressor'

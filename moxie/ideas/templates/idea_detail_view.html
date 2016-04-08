@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load pipeline %}
+{% javascript 'detail' %}
 <section>
     <div class="container">
         <div class="row">
@@ -25,7 +27,7 @@
                     <div class="caption">
                         <p> Funded by {{idea.get_current_funders}} </p>
                         <p>Price: {{ idea.price }} /
-                        Sales goal: {{ idea.get_current_quantity }} /
+                        Current sales: {{ idea.get_current_quantity }} /
                         Sales goal: {{ idea.sales_goal }}</p>
                         <p>End date: {{ idea.end_date }}</p>
                         <div class="progress detail">
@@ -44,27 +46,27 @@
                             </div>
                             <form class="form-horizontal">
                               <div class="form-group">
-                                <label for="inputName" class="control-label col-sm-2">이름</label>
+                                <label for="inputName" class="control-label col-sm-2"><i class="fa fa-user fa-lg"></i></label>
                                 <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="name" placeholder="이름">
+                                  <input type="text" class="form-control" id="funder_name" placeholder="이름">
                                 </div>
                               </div>
                               <div class="form-group">
-                                <label for="inputAddress" class="col-sm-2 control-label">주소</label>
+                                  <label for="inputAddress" class="col-sm-2 control-label "><i class="fa fa-home fa-lg"></i></label>
                                 <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="address" placeholder="주소">
+                                  <input type="text" class="form-control" id="funder_address" placeholder="주소">
                                 </div>
                               </div>
                               <div class="form-group">
-                                <label for="inputAddress" class="col-sm-2 control-label">전화번호</label>
+                                <label for="inputAddress" class="col-sm-2 control-label"><i class="fa fa-mobile fa-2x"></i></label>
                                 <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="address" placeholder="전화번호">
+                                  <input type="text" class="form-control" id="funder_cellphone" placeholder="전화번호">
                                 </div>
                               </div>
                               <div class="form-group">
                                 <label for="inputQuantity" class="col-sm-2 control-label">수량</label>
                                 <div class="col-sm-10">
-                                  <select class="form-control">
+                                  <select class="form-control" id="funder_quantity">
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -76,29 +78,12 @@
                             </form>
                         </div>
                         <a id="toggle-btn" class="btn btn-primary" role="button">구매 정보 보기</a> 
-                        <a id="toggle-btn-fund" class="btn btn-primary" role="button">구매 신청</a> 
+                        <a id="toggle-btn-fund" class="btn btn-primary" data-idea-id="{{idea.id}}" role="button">구매 신청</a> 
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-        $toggle_field = $('#toggle-field');
-        $toggle_btn = $('#toggle-btn');
-        $toggle_btn_fund = $('#toggle-btn-fund');
-
-        $toggle_btn.on('click', function(){
-            console.log('BTN CLICKED');
-            $toggle_field.toggleClass('fund-info-input'); 
-            $toggle_btn_fund.toggle(); 
-            if($toggle_field.hasClass('fund-info-input')){
-                $toggle_btn.html('구매 정보 닫기');
-            } else {
-                $toggle_btn.html('구매 정보 보기');
-            }
-        });
-    </script>
-    
 </section>
 
 {% endblock %}
