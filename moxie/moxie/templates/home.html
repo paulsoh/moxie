@@ -1,6 +1,40 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>
- Main region
-</h1>
+
+<section class="container-fluid">
+    <div class="row">
+        <ul id="scroller">
+            {% for idea in ideas %}
+            <li>
+                <div class="m-carousel-thumbnail">
+                    <img src="{{ idea.thumbnail_image.url }}">
+                    <div class="m-carousel-caption">
+                        <h4>
+                            {{ idea.title }}
+                        </h4>
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>            
+    </div>
+</section>
+
+<section class="container">
+    <div class="row">
+        <h3 class="m-header-text">
+            아이디어를 세상과 공유하세요
+        </h3>
+    </div>
+    
+</section>
+
+<script type="text/javascript">
+(function($){
+        $(function() { //on DOM ready 
+            $("#scroller").simplyScroll();
+        });
+})(jQuery);
+</script>
+
 {% endblock %}

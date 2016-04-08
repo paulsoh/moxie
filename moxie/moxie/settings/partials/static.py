@@ -22,6 +22,8 @@ PIPELINE = {
         'vendor': {
             'source_filenames': (
                 'css/vendor/bootstrap.min.css',
+                'css/vendor/jquery.simplyscroll.css',
+                'css/vendor/font-awesome.min.css',
             ),
             'output_filename': 'css/bootstrap.min.css',
         },
@@ -38,6 +40,7 @@ PIPELINE = {
             'source_filenames': (
               'js/vendor/jquery-1.12.2.min.js',
               'js/vendor/bootstrap.js',
+              'js/vendor/jquery.simplyscroll.js',
             ),
             'output_filename': 'js/vendor.js',
         },

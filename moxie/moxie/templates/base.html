@@ -12,9 +12,9 @@
 </head>
 <body>
     {% include 'partials/header.html' %} 
-    <main class="container">
-        {% block content %} 
-        {% endblock %}
+    <main>
+    {% block content %} 
+    {% endblock %}
     </main>
     {% include 'partials/footer.html' %} 
     {% javascript 'moxie' %}

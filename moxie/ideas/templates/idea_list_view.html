@@ -1,61 +1,76 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="row">
-    <div class="col-xs-12">
-        <div class="page-header list-hero">
-            <h1>Explore other great ideas</h1>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-xs-12 col-md-9">
+<section>
+    <div class="container">
         <div class="row">
-            {% for idea in ideas %}
-            <div class="col-xs-6 col-md-4">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/640x480" alt=""/>
-                    <div class="caption">
-                        <a href="{% url 'idea-detail' idea.id %}">
-                            {{idea.title}}
-                        </a>
-                            <p>
-                                <a href="#" class="btn btn-primary" role="button">Button</a> 
-                                <a href="#" class="btn btn-default" role="button">Button</a>
-                            </p>
-                    </div>
+            <div class="col-xs-12">
+                <div class="page-header list-hero">
+                    <h1>Explore other great ideas</h1>
                 </div>
             </div>
-            {% endfor %}
         </div>
     </div>
-    <div class="col-xs-12 col-md-3">
-        <h2>Categories</h2>
-        <p>Dummy category</p>
-        <p>Dummy category</p>
-        <p>Dummy category</p>
-        <p>Dummy category</p>
-        <p>Dummy category</p>
-        <p>Dummy category</p>
-        <p>Dummy category</p>
-        <p>Dummy category</p>
-        <p>Dummy category</p>
-        <p>Dummy category</p>
-        <p>Dummy category</p>
-        <p>Dummy category</p>
-        <p>Dummy category</p>
-        <p>Dummy category</p>
-        <p>Dummy category</p>
-        <p>Dummy category</p>
-        <p>Dummy category</p>
-        <p>Dummy category</p>
-        <p>Dummy category</p>
-        <p>Dummy category</p>
-        <p>Dummy category</p>
-        <p>Dummy category</p>
-        <p>Dummy category</p>
-    </div>
-</div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-9">
+                <div class="row">
+                    {% for idea in ideas %}
+                    <div class="col-xs-6 col-md-4">
+                        <div class="thumbnail">
+                            <img src="{{ idea.thumbnail_image.url }}" alt="{{idea.title}}"/>
+                            <div class="caption">
+                                <a href="">
+                                    {{idea.title}}
+                                </a>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{idea.get_current_progress}}" aria-valuemin="0" aria-valuemax="100" style="width:{{idea.get_current_progress}}%;">
+                                        <span class="sr-only">{{idea.get_current_progress}}% Complete</span>
+                                    </div>
+                                </div>
+                                <p>
+                                    Funded by {{idea.get_current_funders}}
+                                </p>
+                                
+                                    <p>
+                                        <a href="{% url 'idea-detail' idea.id %}" class="btn btn-primary" role="button">자세히</a> 
+                                    </p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-3">
+                <h2>Categories</h2>
+                <p>Dummy category</p>
+                <p>Dummy category</p>
+                <p>Dummy category</p>
+                <p>Dummy category</p>
+                <p>Dummy category</p>
+                <p>Dummy category</p>
+                <p>Dummy category</p>
+                <p>Dummy category</p>
+                <p>Dummy category</p>
+                <p>Dummy category</p>
+                <p>Dummy category</p>
+                <p>Dummy category</p>
+                <p>Dummy category</p>
+                <p>Dummy category</p>
+                <p>Dummy category</p>
+                <p>Dummy category</p>
+                <p>Dummy category</p>
+                <p>Dummy category</p>
+                <p>Dummy category</p>
+                <p>Dummy category</p>
+                <p>Dummy category</p>
+                <p>Dummy category</p>
+                <p>Dummy category</p>
+            </div>
+        </div>
 
+    </div>
+</section>
 {% endblock %}
