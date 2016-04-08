@@ -69,6 +69,6 @@ class Idea(models.Model):
         return reverse(
             'idea-detail',
             kwargs={
-                'pk': self.id,
+                'slug': self.custom_slug,
             }
         )
