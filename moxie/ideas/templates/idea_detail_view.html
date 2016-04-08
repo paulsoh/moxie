@@ -33,14 +33,72 @@
                                 <span class="sr-only">{{idea.get_current_progress}}% Complete</span>
                             </div>
                         </div>
-                        <a href="{% url 'home' %}" class="btn btn-primary" role="button">구매하기</a> 
+                        <div id="toggle-field">
+                            <div class="thumbnail">
+                                <div class="caption">
+                                    <h4>{{user.first_name}}님,</br> MOXIE LAB에서는 결제기능을 지원하지 않습니다.</h4> 
+                                    <h5>
+                                        아래 정보를 기입해주시면, 최소 구매 필요 인원 달성시 판매자에게 전달됩니다
+                                    </h5>
+                                </div>
+                            </div>
+                            <form class="form-horizontal">
+                              <div class="form-group">
+                                <label for="inputName" class="control-label col-sm-2">이름</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="name" placeholder="이름">
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="inputAddress" class="col-sm-2 control-label">주소</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="address" placeholder="주소">
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="inputAddress" class="col-sm-2 control-label">전화번호</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="address" placeholder="전화번호">
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="inputQuantity" class="col-sm-2 control-label">수량</label>
+                                <div class="col-sm-10">
+                                  <select class="form-control">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </form>
+                        </div>
+                        <a id="toggle-btn" class="btn btn-primary" role="button">구매 정보 보기</a> 
+                        <a id="toggle-btn-fund" class="btn btn-primary" role="button">구매 신청</a> 
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        $toggle_field = $('#toggle-field');
+        $toggle_btn = $('#toggle-btn');
+        $toggle_btn_fund = $('#toggle-btn-fund');
+
+        $toggle_btn.on('click', function(){
+            console.log('BTN CLICKED');
+            $toggle_field.toggleClass('fund-info-input'); 
+            $toggle_btn_fund.toggle(); 
+            if($toggle_field.hasClass('fund-info-input')){
+                $toggle_btn.html('구매 정보 닫기');
+            } else {
+                $toggle_btn.html('구매 정보 보기');
+            }
+        });
+    </script>
+    
 </section>
-
-
 
 {% endblock %}
