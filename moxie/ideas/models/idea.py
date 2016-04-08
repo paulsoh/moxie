@@ -50,10 +50,6 @@ class Idea(models.Model):
         through='Fund',
     )
 
-    def set_custom_slug(self):
-        from django.utils.text import slugify
-        self.custom_slug = slugify(self.title, allow_unicode=True)
-
     @property
     def get_current_quantity(self):
         return self.fund_set.aggregate(Sum('quantity')).get('quantity__sum', 0)
