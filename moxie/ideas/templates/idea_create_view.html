@@ -1,10 +1,30 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>This is the idea create view</h1>
 {% load crispy_forms_tags %}
-
-
-{% crispy form %}
-
+<section>
+    <div class="container">
+        <div class="row">
+            <h1 class="m-detail-hero">아이디어는 이곳에서 태어납니다</h1>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-xs-12">
+                {{form.media}}
+                {% crispy form %}
+            </div>
+            <div class="col-md-4 col-xs-12">
+                <div class="thumbnail">
+                    <p>도움말</p>
+                    <p>그러므로 품고 청춘이 청춘 청춘을 봄날의 그들의 충분히 봄바람이다. 있을 꽃이 착목한는 행복스럽고 무엇을 광야에서 아니더면, 있다. 긴지라 속에서 관현악이며, 눈이 그들의 노래하며 같은 말이다. 대한 노년에게서 넣는 뛰노는 사라지지 그들의 있다. 꽃이 너의 가장 속에 주는 수 있음으로써 밥을 힘있다. 작고 무엇이 이상이 황금시대다. 역사를 생명을 피가 끓는다. 희망의 속에서 주며, 동산에는 있으며, 못하다 있다. 무엇을 고행을 원대하고, 착목한는 것이다. 돋고, 열락의 같으며, 이상이 칼이다.
+                    </p> 
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}
