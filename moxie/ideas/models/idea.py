@@ -24,6 +24,7 @@ class Idea(models.Model):
     )
 
     custom_slug = models.SlugField(
+        allow_unicode=True,
         max_length=255,
         blank=True,
         null=True,
