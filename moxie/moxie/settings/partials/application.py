@@ -35,6 +35,7 @@ INSTALLED_APPS = [
 
     'moxie',
     'ideas',
+    'user',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -75,7 +76,7 @@ WSGI_APPLICATION = 'moxie.wsgi.application'
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'JAPAN'
 
 USE_I18N = True
 

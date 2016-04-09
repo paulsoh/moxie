@@ -24,6 +24,7 @@ PIPELINE = {
                 'css/vendor/bootstrap.min.css',
                 'css/vendor/jquery.simplyscroll.css',
                 'css/vendor/font-awesome.min.css',
+                'css/vendor/bootstrap-social.css',
             ),
             'output_filename': 'css/bootstrap.min.css',
         },
