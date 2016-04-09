@@ -12,6 +12,18 @@ class Fund(models.Model):
         User,
     )
 
+    funder_name = models.CharField(
+        max_length=60,
+    )
+
+    funder_address = models.CharField(
+        max_length=255,
+    )
+
+    funder_cellphone = models.CharField(
+        max_length=16,
+    )
+
     quantity = models.PositiveIntegerField(
         default=1,
     )

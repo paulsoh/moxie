@@ -1,0 +1,1 @@
+from .fundidea import FundIdeaAPIView
