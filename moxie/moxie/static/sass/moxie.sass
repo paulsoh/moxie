@@ -6,6 +6,7 @@
   font-family: $font-family-sans-serif
   font-weight: 300
 
+//labels for thumbnails
 .label-ongoing, .label-hot
   background: $primary-color
 .label-finished, .label-success, .label-fail
@@ -35,6 +36,17 @@
 .thumbnail
   border-radius: 0
   padding: 0
+  overflow: hidden
+  .thumbnail-image-wrapper
+    overflow: hidden
+    &>img.detail-thumbnail
+      transition: all 0.15s linear
+  &:hover img.detail-thumbnail
+    transform: scale(1.05)
+
+//a tag wraps the whole thumbnail
+a.thumbnail-wrapper
+  text-decoration: none
 
 //Fund functionality
 #toggle-field
@@ -67,8 +79,11 @@
       background: rgba(0,0,0,0.2)
 
 
-
 //detail view main image full width
+.thumbnail
+  &>img
+    width: 100%
+
 .thumbnail-image-wrapper
   position: relative
   &>img

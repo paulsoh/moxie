@@ -6,12 +6,21 @@
         <ul id="scroller">
             {% for idea in ideas %}
             <li>
-                <div class="m-carousel-thumbnail">
-                    <img src="{{ idea.thumbnail_image.url }}">
+                <div class="m-carousel-thumbnail-wrapper">
+                    <div class="m-carousel-thumbnail-hover">
+                    </div>
                     <div class="m-carousel-caption">
-                        <h4>
+                        <h5>
                             {{ idea.title }}
-                        </h4>
+                        </h5>
+                        <a href="{% url 'idea-detail' idea.custom_slug %}" class="btn btn-primary" role="button">
+                            보러가기
+                        </a>
+
+                        
+                    </div>
+                    <div class="m-carousel-thumbnail">
+                        <img src="{{ idea.thumbnail_image.url }}">
                     </div>
                 </div>
             </li>

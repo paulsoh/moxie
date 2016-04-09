@@ -1,20 +1,49 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% load pipeline %}
+{% javascript 'create' %}
 {% load crispy_forms_tags %}
 <section>
     <div class="container">
         <div class="row">
-            <h1 class="m-detail-hero">아이디어는 이곳에서 태어납니다</h1>
+            <div class="col-xs-12">
+                <div class="page-header list-hero">
+                    <h1>Your idea starts here</h1>
+                </div>
+            </div>
+            <h1 class="m-detail-hero"></h1>
         </div>
     </div>
 </section>
 <section>
+    
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-xs-12">
-                {{form.media}}
-                {% crispy form %}
+                <div class="row">
+                    <div class="col-xs-12">
+                        <ol class="creating-progress">
+                          <li class="is-active" data-step="1">
+                              기본 정보 입력
+                          </li>
+                          <li data-step="2">
+                              상세 정보 입력
+                          </li>
+                          <li data-step="3" class="progress__last">
+                              마무리
+                          </li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-wrapper">
+                            {{form.media}}
+                            {% crispy form %}
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-md-4 col-xs-12">
                 <div class="thumbnail">

@@ -25,8 +25,11 @@ PIPELINE = {
                 'css/vendor/jquery.simplyscroll.css',
                 'css/vendor/font-awesome.min.css',
                 'css/vendor/bootstrap-social.css',
+                'css/vendor/fileinput.min.css',
+                'css/vendor/slider.css',
+                'css/vendor/datepicker.css',
             ),
-            'output_filename': 'css/bootstrap.min.css',
+            'output_filename': 'css/vendor.css',
         },
         'moxie': {
             'source_filenames': (
@@ -40,10 +43,18 @@ PIPELINE = {
         'vendor': {
             'source_filenames': (
               'js/vendor/jquery-1.12.2.min.js',
-              'js/vendor/bootstrap.js',
-              'js/vendor/jquery.simplyscroll.js',
             ),
             'output_filename': 'js/vendor.js',
+        },
+        'plugins': {
+            'source_filenames': (
+              'js/vendor/jquery.simplyscroll.js',
+              'js/vendor/bootstrap.js',
+              'js/vendor/fileinput.js',
+              'js/vendor/bootstrap-slider.js',
+              'js/vendor/bootstrap-datepicker.js',
+            ),
+            'output_filename': 'js/plugins.js',
         },
         'moxie': {
             'source_filenames': (
@@ -56,6 +67,12 @@ PIPELINE = {
               'js/detail_fund.js',
             ),
             'output_filename': 'js/detail_fund.js',
+        },
+        'create': {
+            'source_filenames': (
+              'js/create_idea.js',
+            ),
+            'output_filename': 'js/create_idea.js',
         },
     },
 
