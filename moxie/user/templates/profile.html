@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="container">
+    <div class="row">
+        <div class="col-md-12 col-xs-12">
+            <h3 class="m-header-text">
+                {{user}}님의 Moxie lab입니다.
+            </h3>
+        </div>
+    </div>    
+    <div class="row">
+        <div class="col-md-12 col-xs-12">
+            <h4>My ideas - 진행중</h4>
+            {% for idea in user.idea_set.all %}
+            <div class="col-xs-6 col-md-4">
+                <div class="thumbnail">
+                    <div class="thumbnail-image-wrapper">
+                        <img src="{{ idea.thumbnail_image.url }}" alt="{{idea.title}}"/>
+                        <div class="thumbnail-image-label">
+                            {% if idea.is_past %}
+                                <span class="label label-finished">종료</span>
+                            {% else %}
+                                <span class="label label-ongoing">진행중</span>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="caption">
+                        <p class="m-thumbnail-title">
+                            {{idea.title}}
+                        </p>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" aria-valuenow="{{idea.get_current_progress}}" aria-valuemin="0" aria-valuemax="100" style="width:{{idea.get_current_progress}}%;">
+                                <span class="sr-only">{{idea.get_current_progress}}% Complete</span>
+                            </div>
+                        </div>
+                        <p>
+                            Funded by {{idea.get_current_funders}}
+                        </p>
+                        {% if idea.is_past %}
+                        <p>
+                            종료됨({{idea.get_time_left}})
+                        </p>
+                        {% else %}
+                        <p>
+                            Time left  {{idea.get_time_left}}
+                        </p>
+                        {% endif %}
+
+                        
+                            <p>
+                                <a href="{% url 'idea-admin' idea.custom_slug %}" class="btn btn-primary" role="button">관리자 보기</a> 
+                            </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+        <h4>My fundings</h4>
+        {% for idea in user.fund_idea_set.all %}
+        <p>
+            {{ idea.title }}
+        </p>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

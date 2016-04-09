@@ -19,9 +19,9 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <ul class="nav nav-pills">
-                            <li role="presentation"><a href="#">Home</a></li>
-                            <li role="presentation"><a href="#">Profile</a></li>
-                            <li role="presentation"><a href="#">Messages</a></li>
+                            <li role="presentation"><a href="#">Trending</a></li>
+                            <li role="presentation"><a href="#">Last chance</a></li>
+                            <li role="presentation"><a href="#">Hall of fame</a></li>
                         </ul>
                     </div>
                 </div>
@@ -29,11 +29,21 @@
                     {% for idea in ideas %}
                     <div class="col-xs-6 col-md-4">
                         <div class="thumbnail">
-                            <img src="{{ idea.thumbnail_image.url }}" alt="{{idea.title}}"/>
+                            <div class="thumbnail-image-wrapper">
+                                <img src="{{ idea.thumbnail_image.url }}" alt="{{idea.title}}"/>
+                                <div class="thumbnail-image-label">
+                                    {% if idea.is_past %}
+                                        <span class="label label-finished">종료</span>
+                                    {% else %}
+                                        <span class="label label-ongoing">진행중</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
                             <div class="caption">
-                                <a href="">
+                                <p class="m-thumbnail-title">
                                     {{idea.title}}
-                                </a>
+                                </p>
                                 <div class="progress">
                                     <div class="progress-bar" role="progressbar" aria-valuenow="{{idea.get_current_progress}}" aria-valuemin="0" aria-valuemax="100" style="width:{{idea.get_current_progress}}%;">
                                         <span class="sr-only">{{idea.get_current_progress}}% Complete</span>
@@ -42,6 +52,16 @@
                                 <p>
                                     Funded by {{idea.get_current_funders}}
                                 </p>
+                                {% if idea.is_past %}
+                                <p>
+                                    종료됨({{idea.get_time_left}})
+                                </p>
+                                {% else %}
+                                <p>
+                                    Time left  {{idea.get_time_left}}
+                                </p>
+                                {% endif %}
+
                                 
                                     <p>
                                         <a href="{% url 'idea-detail' idea.custom_slug %}" class="btn btn-primary" role="button">자세히</a> 
