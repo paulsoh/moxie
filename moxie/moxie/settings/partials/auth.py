@@ -19,7 +19,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Python social auth needs this
 AUTHENTICATION_BACKENDS = (
     'social.backends.facebook.FacebookOAuth2',
-    'social.backends.google.GoogleOAuth2',
+    'social.backends.google.GooglePlusAuth',
     'social.backends.kakao.KakaoOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
