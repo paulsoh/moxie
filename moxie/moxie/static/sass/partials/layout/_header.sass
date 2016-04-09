@@ -7,16 +7,62 @@ header
   .navbar
     margin-bottom: 0
 
-.m-carousel-thumbnail
+// modify with caution
+.m-carousel-thumbnail-wrapper
   position: relative
-  &>img
-    filter: brightness(0.8)
-    -webkit-filter: brightness(0.8)
+  overflow: hidden
+
+  .m-carousel-thumbnail-hover
+    position: absolute
+    height: 400px
+    width: 600px 
+    top: 0
+    left: 0
+    z-index: 5
+    background: rgba(0,0,0,0)
+    &:hover 
+      background: rgba(0,0,0,0.2)
+    &:hover+.m-carousel-caption
+      &>h4 
+        color: $primary-color
+      &>a.btn.btn-primary
+        display: block
+        width: 75%
+        margin: 0 auto
+        max-height: 100px
+        padding: 6px 12px
+        transition: 0.2s all linear
 
   .m-carousel-caption
     position: absolute
-    top: 350px 
+    bottom: 0px
     left: 300px
+    z-index: 10
     transform: translate(-50%, -50%)
     h4
       color: white
+    a.btn.btn-primary
+      display: block
+      width: 75%
+      margin: 0 auto
+      overflow: hidden
+      padding: 0px
+      max-height: 0px
+      transition: 0.2s all linear
+    &:hover
+      &>h4 
+        color: $primary-color
+      &>a.btn.btn-primary
+        max-height: 100px
+        padding: 6px 12px
+    &:hover+.m-carousel-thumbnail-hover 
+      background: rgba(0,0,0,0.2)
+
+  .m-carousel-thumbnail
+    position: relative
+    overflow: hidden
+    &>img
+      filter: brightness(0.8)
+      -webkit-filter: brightness(0.8)
+
+
