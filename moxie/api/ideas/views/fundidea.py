@@ -17,8 +17,10 @@ class FundIdeaAPIView(APIView):
         return Response(serializer.data)
 
     def post(self, request, **kwargs):
-        data = request.data
+        if not request.user.is_authenticated():
+            return Response('Login required!', status=status.HTTP_400_BAD_REQUEST)
 
+        data = request.data
         idea = Idea.objects.get(
             pk=kwargs.get('pk'),
         )
