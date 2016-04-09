@@ -2,6 +2,15 @@
 @import 'partials/typography'
 @import 'partials/layout'
 
+@mixin moxie-font
+  font-family: $font-family-sans-serif
+  font-weight: 300
+
+.label-ongoing, .label-hot
+  background: $primary-color
+.label-finished, .label-success, .label-fail
+  background: $secondary-color
+
 .btn
   border-radius: 0
 
@@ -56,3 +65,25 @@
     left: 0
     &:hover
       background: rgba(0,0,0,0.2)
+
+
+
+//detail view main image full width
+.thumbnail-image-wrapper
+  position: relative
+  &>img
+    width: 100%
+  &>.thumbnail-image-label
+    position: absolute
+    padding: 5px
+    bottom : 0
+    right : 0
+
+.label
+  border-radius: 0
+  @include moxie-font 
+
+.m-thumbnail-title
+  color: $primary-color
+
+
