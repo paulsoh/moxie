@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="container">
+    <div class="row">
+        <h3 class="m-header-text">
+            {{user}}
+        </h3>
+
+        <h4>My ideas - 진행중</h4>
+        
+        {% for idea in user.idea_set.all %}
+        <p>
+            {{ idea.title }}
+        </p>
+        {% endfor %}
+
+        <h4>My ideas - 종료됨</h4>
+        <h4>My fundings</h4>
+        {% for idea in user.fund_idea_set.all %}
+        <p>
+            {{ idea.title }}
+        </p>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

@@ -5,11 +5,14 @@ from django.conf import settings
 
 from moxie.views import HomeTemplateView
 from ideas.views import *
+from user.views import *
 
 from api.ideas.views import *
 
 urlpatterns = [
     url(r'^ideas/explore/(?P<pk>\d+)/fund/$', FundIdeaAPIView.as_view(), name="idea-fund"),
+
+    url(r'^profile/(?P<slug>\S+)/$', ProfileTemplateView.as_view(), name="profile"),
 
     url(r'^summernote/', include('django_summernote.urls')),
     url('', include('social.apps.django_app.urls', namespace='social')),

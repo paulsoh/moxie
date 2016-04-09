@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <header>
     <nav class="navbar navbar-default">
       <div class="container">
@@ -30,7 +31,10 @@
                 </li>
 
             {% if request.user.is_authenticated %}
-            <p class="navbar-text">Welcome, {{user.first_name}}</p> 
+            <a href="{% url 'profile' user.username %}">
+                <p class="navbar-text">Welcome, {{user.first_name}}</p> 
+            </a>
+            
             {% else %}
             <li>
                 <a href="" data-toggle="modal" data-target="#signupModal">Sign up</a>
@@ -43,23 +47,27 @@
         </div>
       </div>
     </nav>
+
 <!-- Modal -->
+
 <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="SignupModalLabel">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Social sign up</h4>
       </div>
       <div class="modal-body">
-        <a href="">Kakao</a>
-        <a href="{% url 'social:begin' backend='facebook'%}">Facebook</a>
-        <a href="">Google</a>
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <a href="{% url 'social:begin' backend='kakao'%}" class="btn btn-block btn-social btn-kakao">
+            <img src="{% static "img/svg/kakaotalk.svg" %}" alt="kakao-login"/>Sign in with Kakao
+            <div class="hover-effect"></div>
+        </a>
+        <a href="{% url 'social:begin' backend='facebook'%}" class="btn btn-block btn-social btn-facebook">
+            <span class="fa fa-facebook"></span> Sign in with Facebook
+        </a>
+        <a href="{% url 'social:begin' backend='google'%}" class="btn btn-block btn-social btn-google">
+            <span class="fa fa-google"></span> Sign in with Google
+        </a>
       </div>
     </div>
   </div>
