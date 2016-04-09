@@ -42,6 +42,16 @@
                                 <p>
                                     Funded by {{idea.get_current_funders}}
                                 </p>
+                                {% if idea.is_past %}
+                                <p>
+                                    종료됨({{idea.get_time_left}})
+                                </p>
+                                {% else %}
+                                <p>
+                                    Time left  {{idea.get_time_left}}
+                                </p>
+                                {% endif %}
+
                                 
                                     <p>
                                         <a href="{% url 'idea-detail' idea.custom_slug %}" class="btn btn-primary" role="button">자세히</a> 
