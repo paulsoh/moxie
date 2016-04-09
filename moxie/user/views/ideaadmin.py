@@ -15,5 +15,8 @@ class IdeaAdminTemplateView(UserPassesTestMixin, DetailView):
     raise_exception = False
 
     def test_func(self):
-        messages.add_message(self.request, messages.WARNING, '아이디어 작성자만 접근할 수 있습니다')
-        return self.request.user == self.get_object().user
+        if self.request.user == self.get_object().user:
+            return True
+        else:
+            messages.add_message(self.request, messages.WARNING, '아이디어 작성자만 접근할 수 있습니다')
+            return False
