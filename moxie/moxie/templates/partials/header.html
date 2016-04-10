@@ -31,25 +31,31 @@
                 </li>
 
             {% if request.user.is_authenticated %}
-            <a href="{% url 'profile' user.username %}">
-                <p class="navbar-text">Welcome, {{user.first_name}}</p> 
-            </a>
-            
+                <p class="navbar-text">{{user.full_name}}</p> 
+                <li>
+                    <a href="{% url 'profile' user.username %}">
+                        {{user.username}}'s ideas 
+                    </a>
+                </li>
+               <li>
+                    <a href="{% url 'logout' %}">
+                        Log out 
+                    </a>
+               </li>
             {% else %}
-            <li>
-                <a href="" data-toggle="modal" data-target="#signupModal">Sign up</a>
-            </li>
-            <li>
-                <a href="">Log in</a>
-            </li>
-            {% endif %}
+                <li>
+                    <a href="" data-toggle="modal" data-target="#signupModal">Sign up</a>
+                </li>
+                <li>
+                    <a href="" data-toggle="modal" data-target="#loginModal">Log in</a>
+                </li>
+                {% endif %}
             </ul>
         </div>
       </div>
     </nav>
 
-<!-- Modal -->
-
+<!-- Signup Modal -->
 <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="SignupModalLabel">
   <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
@@ -59,14 +65,37 @@
       </div>
       <div class="modal-body">
         <a href="{% url 'social:begin' backend='kakao'%}" class="btn btn-block btn-social btn-kakao">
-            <img src="{% static "img/svg/kakaotalk.svg" %}" alt="kakao-login"/>Sign in with Kakao
+            <img src="{% static "img/svg/kakaotalk.svg" %}" alt="kakao-login"/>Sign up with Kakao
             <div class="hover-effect"></div>
         </a>
         <a href="{% url 'social:begin' backend='facebook'%}" class="btn btn-block btn-social btn-facebook">
-            <span class="fa fa-facebook"></span> Sign in with Facebook
+            <span class="fa fa-facebook"></span> Sign up with Facebook
         </a>
         <a href="{% url 'social:begin' backend='google'%}" class="btn btn-block btn-social btn-google">
-            <span class="fa fa-google"></span> Sign in with Google
+            <span class="fa fa-google"></span> Sign up with Google
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="LoginModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Social Login</h4>
+      </div>
+      <div class="modal-body">
+        <a href="{% url 'social:begin' backend='kakao'%}" class="btn btn-block btn-social btn-kakao">
+            <img src="{% static "img/svg/kakaotalk.svg" %}" alt="kakao-login"/>Log in with Kakao
+            <div class="hover-effect"></div>
+        </a>
+        <a href="{% url 'social:begin' backend='facebook'%}" class="btn btn-block btn-social btn-facebook">
+            <span class="fa fa-facebook"></span>Log in with Facebook
+        </a>
+        <a href="{% url 'social:begin' backend='google'%}" class="btn btn-block btn-social btn-google">
+            <span class="fa fa-google"></span> Log in with Google
         </a>
       </div>
     </div>
