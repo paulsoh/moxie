@@ -26,7 +26,7 @@
                 <div class="thumbnail">
                     <div class="caption">
                         <div class="idea-user-info">
-                            <p> {{user.get_full_name}} </p>
+                            <p> {{user.username}} </p>
                         </div>
                         {% if idea.is_past %}
                             <span class="label label-finished">종료</span>
@@ -46,7 +46,7 @@
                         <div id="toggle-field">
                             <div class="thumbnail">
                                 <div class="caption">
-                                    <h4>{{user.first_name}}님,</br> MOXIE LAB에서는 결제기능을 지원하지 않습니다.</h4> 
+                                    <h4>{{user.username}}님,</br> MOXIE LAB에서는 결제기능을 지원하지 않습니다.</h4> 
                                     <h5>
                                         아래 정보를 기입해주시면, 최소 구매 필요 인원 달성시 판매자에게 전달됩니다
                                     </h5>

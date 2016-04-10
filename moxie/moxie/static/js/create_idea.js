@@ -27,7 +27,7 @@
             $id_sales_goal.val(position.value);
         })
         $id_sales_goal.on('change', function(){
-            $goal_slider.slider('setValue', $id_price.val());
+            $goal_slider.slider('setValue', $id_sales_goal.val());
         })
         $price_slider.on('slide', function(position){
             $id_price.val(position.value);

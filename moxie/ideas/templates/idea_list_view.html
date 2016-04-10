@@ -45,6 +45,9 @@
                                 <p class="m-thumbnail-title">
                                     {{idea.title}}
                                 </p>
+                                <p class="m-thumbnail-title">
+                                    Brought to you by {{idea.user.username }}
+                                </p>
                                 <div class="progress">
                                     <div class="progress-bar" role="progressbar" aria-valuenow="{{idea.get_current_progress}}" aria-valuemin="0" aria-valuemax="100" style="width:{{idea.get_current_progress}}%;">
                                         <span class="sr-only">{{idea.get_current_progress}}% Complete</span>
