@@ -1,5 +1,9 @@
-from django.shortcuts import render
+from urllib.request import urlopen
 
+from django.shortcuts import render
+from django.core.files.base import ContentFile
+
+from social.utils import slugify
 from social.pipeline.partial import partial
 
 
@@ -30,7 +34,12 @@ def get_user_description(backend, details, response, request, user, is_new=False
 
 def save_profile(backend, user, response, is_new, *args, **kwargs):
     if backend.name == 'facebook':
-        user.alias = kwargs.get('alias')
-        user.email = kwargs.get('email')
-        user.phonenumber = kwargs.get('phone')
+        user.alias = kwargs.get('alias', user.alias)
+        user.email = kwargs.get('email', user.email)
+        user.phonenumber = kwargs.get('phone', user.phonenumber)
+        profile_url = "http://graph.facebook.com/{fb_id}/picture?type=large".format(
+            fb_id=kwargs.get('uid', '1693581180899208')
+        )
+        profile_image = urlopen(profile_url)
+        user.profile_image.save(slugify(user.alias + "social") + '.jpg', ContentFile(profile_image.read()))
         user.save()
