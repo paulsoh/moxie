@@ -95,7 +95,7 @@
         $toggle_btn.on('click', function(){
             console.log('BTN CLICKED');
             $toggle_field.toggleClass('fund-info-input'); 
-            $toggle_btn_fund.toggle(); 
+            $toggle_btn_fund.toggleClass('hidden'); 
             if($toggle_field.hasClass('fund-info-input')){
                 $toggle_btn.html('구매 정보 닫기');
             } else {

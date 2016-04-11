@@ -108,14 +108,13 @@
         <div class="col-md-4 col-xs-12">
             <div class="row">
                 <div class="col-xs-12 col-md-offset-1 col-md-10">
-                    <div class="thumbnail">
+                    <div class="thumbnail profile">
                         <div class="thumbnail-image-wrapper">
                             {% if user.profile_image %}
                             <img class="round" src="{{ user.profile_image.url }}" alt="{{user.username}}님의 프로필 사진"/>
                             {% else %}
                             {% endif %}
                         </div>
-                        <hr>
                         <div class="caption">
                             <div class="row">
                                 <div class="col-xs-12">

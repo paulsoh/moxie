@@ -97,7 +97,11 @@ class Idea(models.Model):
                 timezone.get_default_timezone(),
         )
 
-        return _end_date-t
+        time_left = _end_date-t
+
+        if time_left//3600 is 0:
+            return "{days}d".format(days=time_left.days)
+        return "{days}d {hours}h".format(days=time_left.days, hours=time_left.seconds//3600)
 
     def __str__(self):
         return self.title

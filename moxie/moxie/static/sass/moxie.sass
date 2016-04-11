@@ -2,9 +2,6 @@
 @import 'partials/typography'
 @import 'partials/layout'
 
-@mixin moxie-font
-  font-family: $font-family-sans-serif
-  font-weight: 300
 
 //labels for thumbnails
 .label-ongoing, .label-hot
@@ -33,21 +30,6 @@
 .progress-bar
   background: $primary-color
 
-.thumbnail
-  border-radius: 0
-  padding: 0
-  overflow: hidden
-  .thumbnail-image-wrapper
-    overflow: hidden
-    &>img.detail-thumbnail
-      transition: all 0.15s linear
-  &:hover img.detail-thumbnail
-    transform: scale(1.05)
-
-//a tag wraps the whole thumbnail
-a.thumbnail-wrapper
-  text-decoration: none
-
 //Fund functionality
 #toggle-field
   max-height: 0
@@ -60,7 +42,7 @@ a.thumbnail-wrapper
     max-height: 100vh
 
 #toggle-btn-fund
-  display: none
+  margin-bottom: 8px
 
 //Kakao social login
 //To create same hovering effect for kakao
@@ -77,28 +59,5 @@ a.thumbnail-wrapper
     left: 0
     &:hover
       background: rgba(0,0,0,0.2)
-
-
-//detail view main image full width
-.thumbnail
-  &>img
-    width: 100%
-
-.thumbnail-image-wrapper
-  position: relative
-  &>img
-    width: 100%
-  &>.thumbnail-image-label
-    position: absolute
-    padding: 5px
-    bottom : 0
-    right : 0
-
-.label
-  border-radius: 0
-  @include moxie-font 
-
-.m-thumbnail-title
-  color: $primary-color
 
 
