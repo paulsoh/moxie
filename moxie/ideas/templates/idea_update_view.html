@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}
+Edit your idea
+{% endblock %}
+
+{% block content %}
+{% load pipeline %}
+{% javascript 'update' %}
+{% load crispy_forms_tags %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="page-header list-hero">
+                    <h1>Edit Your idea</h1>
+                </div>
+            </div>
+            <h1 class="m-detail-hero"></h1>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-xs-12">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="form-wrapper">
+                            {{form.media}}
+                            {% crispy form %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
