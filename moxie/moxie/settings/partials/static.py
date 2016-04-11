@@ -68,6 +68,12 @@ PIPELINE = {
             ),
             'output_filename': 'js/detail_fund.js',
         },
+        'update': {
+            'source_filenames': (
+              'js/update_idea.js',
+            ),
+            'output_filename': 'js/update_idea.js',
+        },
         'create': {
             'source_filenames': (
               'js/create_idea.js',
