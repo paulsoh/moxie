@@ -39,7 +39,16 @@ class User(AbstractUser):
     )
 
     def generate_verification_token(self):
-        pass
+        from hashids import Hashids
+        from random import random
+        from hashlib import sha1
+        salt = sha1(str(random()).encode('utf-8')).hexdigest()[:5]
+        verification_token_object = Hashids(
+            salt=salt,
+            min_length=32,
+        )
+
+        return verification_token_object.encode(int(salt, 16))
 
     @property
     def get_current_sales(self):
