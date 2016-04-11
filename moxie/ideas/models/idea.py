@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.db.models import Sum
 from django.core.urlresolvers import reverse
@@ -8,7 +9,7 @@ from django.contrib.auth.models import User
 class Idea(models.Model):
 
     user = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
     )
 
     title = models.CharField(
@@ -50,7 +51,7 @@ class Idea(models.Model):
     )
 
     fund_user_set = models.ManyToManyField(
-        User,
+        settings.AUTH_USER_MODEL,
         related_name='fund_idea_set',
         through='Fund',
     )

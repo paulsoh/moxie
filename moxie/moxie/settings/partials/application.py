@@ -33,9 +33,9 @@ INSTALLED_APPS = [
     'crispy_forms',
     'social.apps.django_app.default',
 
+    'user',
     'moxie',
     'ideas',
-    'user',
 ]
 
 MIDDLEWARE_CLASSES = [

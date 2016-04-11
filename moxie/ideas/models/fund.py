@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -9,7 +10,7 @@ class Fund(models.Model):
     )
 
     funder = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
     )
 
     funder_name = models.CharField(
