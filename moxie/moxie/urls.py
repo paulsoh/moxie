@@ -22,6 +22,8 @@ urlpatterns = [
     url(r'^ideas/explore/$', IdeaListView.as_view(), name="idea-list"),
     url(r'^ideas/create/$', IdeaCreateView.as_view(), name="idea-create"),
 
+    url(r'^auth/logout/', signout, name="logout"),
+
     url(r'^admin/', admin.site.urls),
     url(r'^$', HomeTemplateView.as_view(), name="home"),
 ] + static(

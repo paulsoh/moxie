@@ -31,7 +31,6 @@
                 </li>
 
             {% if request.user.is_authenticated %}
-                <p class="navbar-text">{{user.full_name}}</p> 
                 <li>
                     <a href="{% url 'profile' user.username %}">
                         {{user.username}}'s ideas 
