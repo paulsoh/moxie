@@ -25,14 +25,23 @@ class FundIdeaAPIView(APIView):
             pk=kwargs.get('pk'),
         )
 
-        fund = Fund.objects.create(
+        fund, is_created = Fund.objects.get_or_create(
             funder=request.user,
             idea=idea,
-            funder_name=data.get('funder_name'),
-            funder_address=data.get('funder_address'),
-            funder_cellphone=data.get('funder_cellphone'),
-            quantity=data.get('quantity'),
         )
+
+        if is_created:
+            fund.funder = request.user
+            fund.idea = idea
+            fund.funder_name = data.get('funder_name', 'Null')
+            fund.funder_address = data.get('funder_address', 'Null')
+            fund.funder_cellphone = data.get('funder_cellphone', 'Null')
+            fund.quantity = data.get('quantity', 'Null')
+
+        else:
+            fund.quantity += int(data.get('quantity'))
+
+        fund.save()
 
         serializer = FundIdeaSerializer(fund)
         if FundIdeaSerializer(data=serializer.data):
