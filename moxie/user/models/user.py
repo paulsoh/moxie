@@ -28,6 +28,19 @@ class User(AbstractUser):
         blank=True
     )
 
+    is_phonenumber_verified = models.BooleanField(
+        default=True,
+    )
+
+    phonenumber_verification_token = models.CharField(
+        max_length=32,
+        null=True,
+        blank=True,
+    )
+
+    def generate_verification_token(self):
+        pass
+
     @property
     def get_current_sales(self):
         sum = 0
