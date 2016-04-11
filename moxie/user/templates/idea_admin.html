@@ -1,37 +1,49 @@
 {% extends 'base.html' %}
+{% block title %}
+Idea admin
+{% endblock %}
 {% block content %}
 
-<section class="container">
-    <div class="row">
-        <div class="col-md-12 col-xs-12">
-            <h3 class="m-header-text">
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="page-header list-hero">
+                    <h1>
                 {{idea.user}}님의</br> {{idea.title}}</br> Idea 현황입니다 
-            </h3>
-        </div>
-    </div>    
-    <div class="row">
-        <div class="col-md-12 col-xs-12">
-            <table class="table table-striped">
-                <tr>
-                    <th>User</th>
-                    <th>Funder name</th>
-                    <th>Funder address</th>
-                    <th>Funder cellphone</th>
-                    <th>Quantity</th>
-                </tr>
-                {% for fund in idea.fund_set.all %}
-                <tr>
-                    <td>{{fund.funder}}</td>
-                    <td>{{fund.funder_name}}</td>
-                    <td>{{fund.funder_address}}</td>
-                    <td>{{fund.funder_cellphone}}</td>
-                    <td>{{fund.quantity}}</td>
-                </tr>
-                {% endfor %}
-            </table>
-            
+                    </h1>
+                </div>
+            </div>
         </div>
     </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-xs-12">
+                <table class="table table-striped">
+                    <tr>
+                        <th>User</th>
+                        <th>Funder name</th>
+                        <th>Funder address</th>
+                        <th>Funder cellphone</th>
+                        <th>Quantity</th>
+                    </tr>
+                    {% for fund in idea.fund_set.all %}
+                    <tr>
+                        <td>{{fund.funder}}</td>
+                        <td>{{fund.funder_name}}</td>
+                        <td>{{fund.funder_address}}</td>
+                        <td>{{fund.funder_cellphone}}</td>
+                        <td>{{fund.quantity}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                
+            </div>
+        </div>
+    </div>
+    
 </section>
 
 {% endblock %}
