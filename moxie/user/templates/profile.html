@@ -1,75 +1,148 @@
 {% extends 'base.html' %}
+
+{% block title %}
+    {% if user.alias %}
+        {{ user.alias }}
+    {% else %}
+        {{ user.username }}
+    {% endif %}
+{% endblock %}
+
 {% block content %}
-
-<section class="container">
-    <div class="row">
-        <div class="col-md-12 col-xs-12">
-            <h3 class="m-header-text">
-                {{user.username}}님의 Moxie lab입니다.
-            </h3>
-            {% if user.profile_image %}
-            <img src="{{ user.profile_image.url }}" alt="{{user.username}}님의 프로필 사진"/>
-            {% else %}
-            {% endif %}
-        </div>
-    </div>    
-    <div class="row">
-        <div class="col-md-12 col-xs-12">
-            <h4>My ideas - 진행중</h4>
-            {% for idea in user.idea_set.all %}
-            <div class="col-xs-6 col-md-4">
-                <div class="thumbnail">
-                    <div class="thumbnail-image-wrapper">
-                        <img src="{{ idea.thumbnail_image.url }}" alt="{{idea.title}}"/>
-                        <div class="thumbnail-image-label">
-                            {% if idea.is_past %}
-                                <span class="label label-finished">종료</span>
-                            {% else %}
-                                <span class="label label-ongoing">진행중</span>
-                            {% endif %}
-                        </div>
-                    </div>
-                    
-                    <div class="caption">
-                        <p class="m-thumbnail-title">
-                            {{idea.title}}
-                        </p>
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="{{idea.get_current_progress}}" aria-valuemin="0" aria-valuemax="100" style="width:{{idea.get_current_progress}}%;">
-                                <span class="sr-only">{{idea.get_current_progress}}% Complete</span>
-                            </div>
-                        </div>
-                        <p>
-                            Funded by {{idea.get_current_funders}}
-                        </p>
-                        {% if idea.is_past %}
-                        <p>
-                            종료됨({{idea.get_time_left}})
-                        </p>
-                        {% else %}
-                        <p>
-                            Time left  {{idea.get_time_left}}
-                        </p>
-                        {% endif %}
-
-                        
-                            <p>
-                                <a href="{% url 'idea-admin' idea.custom_slug %}" class="btn btn-primary" role="button">관리자 보기</a> 
-                            </p>
-                    </div>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="page-header list-hero">
+                    <h1>{{user.username}}님의 Idea board입니다</h1>
                 </div>
             </div>
-            {% endfor %}
         </div>
-    </div>
-
-        <h4>My fundings</h4>
-        {% for idea in user.fund_idea_set.all %}
-        <p>
-            {{ idea.title }}
-        </p>
-        {% endfor %}
     </div>
 </section>
 
+<section class="container">
+    <div class="row">
+        <div class="col-md-8 col-xs-12">
+            <div class="row">
+                <div class="col-xs-12">
+                    <table class="table table-dashboard">
+                        <tr>
+                            <th>진행중 아이디어</th>
+                            <th>종료된 아이디어</th>
+                            <th>펀딩중 아이디어</th>
+                        </tr>
+                        <tr>
+                            <td>{{user.get_current_ideas_count}}</td>
+                            <td>{{user.get_finished_ideas_count}}</td>
+                            <td>{{user.fund_idea_set.count}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <h4>My ideas - 진행중</h4>
+                    {% for idea in user.idea_set.all %}
+                    <div class="col-xs-6 col-md-4">
+                        <div class="thumbnail">
+                            <div class="thumbnail-image-wrapper">
+                                <img src="{{ idea.thumbnail_image.url }}" alt="{{idea.title}}"/>
+                                <div class="thumbnail-image-label">
+                                    {% if idea.is_past %}
+                                        <span class="label label-finished">종료</span>
+                                    {% else %}
+                                        <span class="label label-ongoing">진행중</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="caption">
+                                <p class="m-thumbnail-title">
+                                    {{idea.title}}
+                                </p>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{idea.get_current_progress}}" aria-valuemin="0" aria-valuemax="100" style="width:{{idea.get_current_progress}}%;">
+                                        <span class="sr-only">{{idea.get_current_progress}}% Complete</span>
+                                    </div>
+                                </div>
+                                <p>
+                                    Funded by {{idea.get_current_funders}}
+                                </p>
+                                {% if idea.is_past %}
+                                <p>
+                                    종료됨({{idea.get_time_left}})
+                                </p>
+                                {% else %}
+                                <p>
+                                    Time left  {{idea.get_time_left}}
+                                </p>
+                                {% endif %}
+                                    <p>
+                                        <a href="{% url 'idea-admin' idea.custom_slug %}" class="btn btn-primary" role="button">관리자 보기</a> 
+                                    </p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-xs-12">
+                    <h4>My fundings</h4>
+                    {% for idea in user.fund_idea_set.all %}
+                    <p>{{ idea.title }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-12">
+            <div class="row">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <div class="thumbnail">
+                        <div class="thumbnail-image-wrapper">
+                            {% if user.profile_image %}
+                            <img class="round" src="{{ user.profile_image.url }}" alt="{{user.username}}님의 프로필 사진"/>
+                            {% else %}
+                            {% endif %}
+                        </div>
+                        <hr>
+                        <div class="caption">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="user-basic">
+                                        <h4>
+                                            {% if user.alias %}
+                                                {{user.alias}}
+                                            {% else %}
+                                                {{user.username}}
+                                            {% endif %}
+                                        </h4>
+                                        <div class="user-level">
+                                            <h5>level 1
+                                                <i class="fa fa-certificate"></i>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="contact-basic">
+                                        {% if user.email %}
+                                        <a href="mailto:{{user.email}}" class="btn btn-primary">
+                                            <h5><i class="fa fa-envelope"></i> 문의하기
+                                            </h5>
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</section>
 {% endblock %}
