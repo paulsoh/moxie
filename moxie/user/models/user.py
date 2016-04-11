@@ -28,5 +28,45 @@ class User(AbstractUser):
         blank=True
     )
 
+    @property
+    def get_current_sales(self):
+        sum = 0
+        for idea in self.idea_set.all():
+            if not idea.is_past:
+                sum += idea.price*idea.get_current_quantity
+        return sum
+
+    @property
+    def get_total_sales(self):
+        sum = 0
+        for idea in self.idea_set.all():
+            if not idea.is_past:
+                sum += idea.price*idea.get_current_quantity
+        return sum
+
+    @property
+    def get_sales_goal(self):
+        sum = 0
+        for idea in self.idea_set.all():
+            if not idea.is_past:
+                sum += idea.price*idea.sales_goal
+        return sum
+
+    @property
+    def get_current_ideas_count(self):
+        sum = 0
+        for idea in self.idea_set.all():
+            if not idea.is_past:
+                sum += 1
+        return sum
+
+    @property
+    def get_finished_ideas_count(self):
+        sum = 0
+        for idea in self.idea_set.all():
+            if idea.is_past:
+                sum += 1
+        return sum
+
     def __str__(self):
         return "{name}".format(name=self.username)
