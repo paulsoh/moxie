@@ -29,7 +29,7 @@ class User(AbstractUser):
     )
 
     is_phonenumber_verified = models.BooleanField(
-        default=True,
+        default=False,
     )
 
     phonenumber_verification_token = models.CharField(
@@ -38,7 +38,7 @@ class User(AbstractUser):
         blank=True,
     )
 
-    def generate_verification_token(self):
+    def generate_and_get_verification_token(self):
         from hashids import Hashids
         from random import random
         from hashlib import sha1
@@ -49,6 +49,12 @@ class User(AbstractUser):
         )
 
         return verification_token_object.encode(int(salt, 16))
+
+    """
+    def update_phonenumber_verification_token(self):
+        self.phonenumber_verification_token = self.generate_verification_token()
+        self.save()
+    """
 
     @property
     def get_current_sales(self):

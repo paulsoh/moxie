@@ -10,8 +10,12 @@ from user.views import *
 from api.ideas.views import *
 
 urlpatterns = [
+    url(r'^auth/verify/phonenumber/(?P<slug>\w+)/$', UserVerifyPhoneView.as_view(), name="verify-phone-result"),
+    url(r'^auth/verify/phonenumber/$', UserVerifyPhoneView.as_view(), name="verify-phone"),
     url(r'^ideas/explore/(?P<pk>\d+)/fund/$', FundIdeaAPIView.as_view(), name="idea-fund"),
 
+    url(r'^profile/(?P<slug>\S+)/admin/$', ProfileDashboardTemplateView.as_view(), name="profile-dashboard"),
+    url(r'^profile/(?P<slug>\S+)/modify/$', ProfileUpdateTemplateView.as_view(), name="profile-modify"),
     url(r'^profile/(?P<slug>\S+)/$', ProfileTemplateView.as_view(), name="profile"),
 
     url(r'^summernote/', include('django_summernote.urls')),

@@ -14,7 +14,14 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="page-header list-hero">
-                    <h1>{{user.username}}님의 Idea board입니다</h1>
+                    <h1>
+                        {% if user.alias %}
+                            {{ user.alias }}
+                        {% else %}
+                            {{ user.username }}
+                        {% endif %}
+                        님의 Idea board입니다
+                    </h1>
                 </div>
             </div>
         </div>
@@ -26,23 +33,14 @@
         <div class="col-md-8 col-xs-12">
             <div class="row">
                 <div class="col-xs-12">
-                    <table class="table table-dashboard">
-                        <tr>
-                            <th>진행중 아이디어</th>
-                            <th>종료된 아이디어</th>
-                            <th>펀딩중 아이디어</th>
-                        </tr>
-                        <tr>
-                            <td>{{user.get_current_ideas_count}}</td>
-                            <td>{{user.get_finished_ideas_count}}</td>
-                            <td>{{user.fund_idea_set.count}}</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <h4>My ideas - 진행중</h4>
+                    <h4>
+                        {% if user.alias %}
+                            {{ user.alias }}
+                        {% else %}
+                            {{ user.username }}
+                        {% endif %}
+                        's ideas - 진행중
+                    </h4>
                     {% for idea in user.idea_set.all %}
                     <div class="col-xs-6 col-md-4">
                         <div class="thumbnail">
@@ -78,18 +76,6 @@
                                     Time left  {{idea.get_time_left}}
                                 </p>
                                 {% endif %}
-                                <div class="admin-actions">
-                                    <div class="row">
-                                        <div class="col-xs-12 col-md-6">
-                                            <a href="{% url 'idea-admin' idea.custom_slug %}" class="btn btn-primary" role="button">Idea 현황</a> 
-                                        </div>
-                                        <div class="col-xs-12 col-md-6">
-                                            <a href="{% url 'idea-update' idea.custom_slug %}" class="btn btn-primary" role="button">Idea 수정</a> 
-                                        </div>
-                                    </div>
-                                    
-                                </div>
-                                
                             </div>
                         </div>
                     </div>
@@ -98,7 +84,14 @@
             </div>
             <div class="row">
                 <div class="col-md-8 col-xs-12">
-                    <h4>My fundings</h4>
+                    <h4>
+                        {% if user.alias %}
+                            {{ user.alias }}
+                        {% else %}
+                            {{ user.username }}
+                        {% endif %}
+                        's fundings
+                    </h4>
                     {% for idea in user.fund_idea_set.all %}
                     <p>{{ idea.title }}</p>
                     {% endfor %}
