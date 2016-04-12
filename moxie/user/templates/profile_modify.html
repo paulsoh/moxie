@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Sign up
+{% endblock %}
+
+{% block content %}
+<section id="signupform" class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-xs-8 col-xs-offset-2">
+            <h3 class="page-header list-hero">
+                {{user.username}}님</br>
+                프로필 정보 수정
+            </h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-xs-8 col-xs-offset-2">
+            <div class="profile-image-wrapper">
+                {% if user.profile_image %}
+                <img src="{{user.profile_image.url}}" alt="profile photo">
+                {% endif %}
+            </div>
+            <form method="post" action="{% url 'profile-modify' user.username %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="alias">Moxie에서 사용할 이름을 입력해주세요</label>
+                    <input type="text" class="form-control" id="alias" name="alias" value={{user.alias}} required>
+                </div>
+                <div class="form-group">
+                    <label for="email">이메일을 입력해주세요</label>
+                    <input type="text" class="form-control" id="email" name="email" value="{{user.email}}" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">핸드폰 번호를 입력해주세요</label>
+                    <input type="text" class="form-control" id="phone" name="phone" value="{{user.phonenumber}}" required>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="form-control signup-btn" id="submit" value="정보 수정하기">
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

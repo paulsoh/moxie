@@ -35,25 +35,44 @@
             <div class="col-xs-12 col-md-4">
                 <div class="thumbnail">
                     <div class="caption">
-                        <p> Funded by <span id="current_funders">{{idea.get_current_funders}}</span></p>
-                        <p>Price: {{ idea.price }} /
-                        Current sales: <span id="current_quantity">{{ idea.get_current_quantity }}</span> /
-                        Sales goal: {{ idea.sales_goal }}</p>
-                        <p>End date: {{ idea.end_date }}</p>
+                        <div class="idea-status">
+                            <div class="funded-by">
+                                <span>
+                                    Funded by {{idea.get_current_funders}}
+                                </span>
+                            </div>
+                            <div class="idea-price">
+                                <span>
+                                    Price: {{ idea.price }}
+                                </span>
+                            </div>
+                            <div class="idea-sales">
+                                <span>
+                                    Current sales:{{ idea.get_current_quantity }}
+                                </span>
+                            </div>
+                            <div class="sales-goal">
+                                <span>
+                                    Sales goal: {{ idea.sales_goal }}
+                                </span>
+                            </div>
+                        </div>
                         <div class="progress detail">
                             <div class="progress-bar" role="progressbar" id="current_progress" aria-valuenow="{{idea.get_current_progress}}" aria-valuemin="0" aria-valuemax="100" style="width:{{idea.get_current_progress}}%;">
                                 <span class="sr-only">{{idea.get_current_progress}}% Complete</span>
                             </div>
                         </div>
+                        <p>End date: {{ idea.end_date }}</p>
                         <div id="toggle-field">
                             <div class="thumbnail">
                                 <div class="caption">
-                                    <h4>{{user.username}}님,</br> MOXIE LAB에서는 결제기능을 지원하지 않습니다.</h4> 
+                                    <h4>{% if user.alias %} {{user.alias}} {%else %} {{user.username}}{% endif %}님,</br> MOXIE LAB에서는 결제기능을 지원하지 않습니다.</h4> 
                                     <h5>
                                         아래 정보를 기입해주시면, 최소 구매 필요 인원 달성시 판매자에게 전달됩니다
                                     </h5>
                                 </div>
                             </div>
+                            {% if user.is_authenticated %}
                             <form class="form-horizontal">
                               <div class="form-group">
                                 <label for="inputName" class="control-label col-sm-2"><i class="fa fa-user fa-lg"></i></label>
@@ -70,7 +89,19 @@
                               <div class="form-group">
                                 <label for="inputAddress" class="col-sm-2 control-label"><i class="fa fa-mobile fa-2x"></i></label>
                                 <div class="col-sm-10">
-                                  <input type="text" class="form-control" id="funder_cellphone" placeholder="전화번호">
+                                    <input type="text" class="form-control" readonly="readonly" id="funder_cellphone" value="{{ user.phonenumber }}" placeholder="전화번호">
+                                </div>
+                                <div class="col-sm-10">
+                                    <div class="detail-phone-validation-wrapper">
+                                        {% if not user.is_phonenumber_verified %}
+                                        <h5>펀딩을 위해서는 연락처 인증이 필요합니다</h5>
+                                        <a class="btn btn-primary" role="button" href=" {% url 'profile-dashboard' user.username %} ">
+                                            인증하러가기
+                                        </a>
+                                        {% else %}
+                                        <h5>연락처 인증이 되었습니다</h5>
+                                        {% endif %}
+                                    </div>
                                 </div>
                               </div>
                               <div class="form-group">
@@ -86,12 +117,19 @@
                                 </div>
                               </div>
                             </form>
+                        {% endif %}
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="contact-basic">
+                                {% if user.is_authenticated %}
+                                    {% if user.is_phonenumber_verified %}
                                     <a id="toggle-btn-fund" class="hidden btn btn-primary" data-idea-id="{{idea.id}}" role="button">구매 신청</a> 
+                                    {% else  %}
+                                    <a id="toggle-btn-fund" class="hidden btn btn-primary disabled" data-idea-id="{{idea.id}}" role="button">구매 신청</a> 
+                                    {% endif %}
                                     <a id="toggle-btn" class="btn btn-primary" role="button">구매 정보 보기</a> 
+                                {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -106,12 +144,14 @@
                         </div>
                     </div>
                     
-                    <div class="thumbnail-image-wrapper">
-                        {% if idea.user.profile_image %}
-                            <img class="round" src="{{ idea.user.profile_image.url }}" alt="{{idea.user.username}}님의 프로필 사진"/>
-                        {% else %}
-                        {% endif %}
-                    </div>
+                    <a href="{% url 'profile' idea.user.username %}">
+                        <div class="thumbnail-image-wrapper">
+                            {% if idea.user.profile_image %}
+                                <img class="round" src="{{ idea.user.profile_image.url }}" alt="{{idea.user.username}}님의 프로필 사진"/>
+                            {% else %}
+                            {% endif %}
+                        </div>
+                    </a>
                     <hr>
                     <div class="caption">
                         <div class="row">
@@ -127,6 +167,9 @@
                                     <div class="user-level">
                                         <h5>level 1
                                             <i class="fa fa-certificate"></i>
+                                            {% if idea.user.is_phonenumber_verified %}
+                                            <i class="fa fa-mobile fa-lg"></i>
+                                            {% endif %}
                                         </h5>
                                     </div>
                                 </div>
