@@ -32,8 +32,13 @@
 
             {% if request.user.is_authenticated %}
                 <li>
-                    <a href="{% url 'profile' user.username %}">
-                        {{user.username}}'s ideas 
+                    <a href="{% url 'profile-dashboard' user.username %}">
+                        {% if user.alias %}
+                            {{ user.alias }}
+                        {% else %}
+                            {{ user.username }}
+                        {% endif %}
+                        's ideas
                     </a>
                 </li>
                <li>

@@ -1,0 +1,304 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {% if user.alias %}
+        {{ user.alias }}
+    {% else %}
+        {{ user.username }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="page-header list-hero">
+                    <h1>
+                        {% if user.alias %}
+                            {{ user.alias }}
+                        {% else %}
+                            {{ user.username }}
+                        {% endif %}
+                        님의 Idea board입니다
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container">
+    <div class="row">
+        <div class="col-md-8 col-xs-12">
+            <div class="row">
+                <div class="col-xs-12">
+                    <table class="table table-dashboard">
+                        <tr>
+                            <th>진행중 아이디어</th>
+                            <th>종료된 아이디어</th>
+                            <th>펀딩중 아이디어</th>
+                        </tr>
+                        <tr>
+                            <td>{{user.get_current_ideas_count}}</td>
+                            <td>{{user.get_finished_ideas_count}}</td>
+                            <td>{{user.fund_idea_set.count}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3>진행중 아이디어</h3>
+                    </div>
+                    
+                    {% for idea in user.idea_set.all %}
+                    <div class="col-xs-12 col-sm-6 col-md-6 list-grid">
+                        <div class="thumbnail">
+                        <a class="thumbnail-wrapper" href="{% url 'idea-detail' idea.custom_slug %}">
+                            <div class="thumbnail-image" style="background: url({{idea.thumbnail_image.url}}); background-size: cover; background-repeat: no-repeat; background-position: center center;">
+                                <div class="status-label">
+                                    {% if idea.is_past %}
+                                        <span class="label label-finished">종료</span>
+                                    {% else %}
+                                        <span class="label label-ongoing">진행중</span>
+                                    {% endif %}
+                                </div>
+                                <div class="user-thumbnail">
+                                    {% if idea.user.profile_image %}
+                                    <div class="user-thumbnail-inner-wrapper">
+                                        <div class="user-thumbnail-hover-mask">
+                                        </div>
+                                        <span> {% if idea.user.alias %}
+                                                {{ idea.user.alias }}
+                                            {% else %}
+                                                {{ idea.user.username }}
+                                            {% endif %}
+                                        </span>
+                                        <img alt="" src="{{idea.user.profile_image.url }}"/>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </a>
+                            <div class="thumbnail-caption">
+                                <div class="thumbnail-title">
+                                    <span class="title">
+                                        {{idea.title}}
+                                    </span>
+                                </div>
+                                <div class="thumbnail-category">
+                                    <span class="category">
+                                        dummy_category
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="thumbnail-meta">
+                                <div class="thumbnail-likes">
+                                    <i class="fa fa-thumbs-o-up fa-lg"></i>
+                                    <span class="current-funding-likes">
+                                        {% if not idea.get_current_progress %}
+                                             0 
+                                        {% else %}
+                                           {{idea.get_current_progress}}
+                                        {% endif %}
+                                    </span>
+                                </div>
+                                <div class="thumbnail-funded">
+                                    <i class="fa fa-users fa-lg"></i>
+                                    <span class="current-funding-info">
+                                        {{idea.get_current_funders}}
+                                    </span>
+                                </div>
+                                <div class="thumbnail-days-left">
+                                    <i class="fa fa-clock-o fa-lg"></i>
+                                    <span class="current-funding-status">
+                                    {% if idea.is_past %}
+                                        종료({{idea.get_time_left}})
+                                    {% else %}
+                                        {{idea.get_time_left}}
+                                    {% endif %}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="thumbnail-progress">
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{idea.get_current_progress}}" aria-valuemin="0" aria-valuemax="100" style="width:{{idea.get_current_progress}}%;">
+                                        <span class="sr-only">{{idea.get_current_progress}}% Complete</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h3>펀딩중 아이디어</h3>
+                    </div>
+                    {% for idea in user.fund_idea_set.all %}
+                    <div class="col-xs-12 col-sm-6 col-md-6 list-grid">
+                        <div class="thumbnail">
+                        <a class="thumbnail-wrapper" href="{% url 'idea-detail' idea.custom_slug %}">
+                            <div class="thumbnail-image" style="background: url({{idea.thumbnail_image.url}}); background-size: cover; background-repeat: no-repeat; background-position: center center;">
+                                <div class="status-label">
+                                    {% if idea.is_past %}
+                                        <span class="label label-finished">종료</span>
+                                    {% else %}
+                                        <span class="label label-ongoing">진행중</span>
+                                    {% endif %}
+                                </div>
+                                <div class="user-thumbnail">
+                                    {% if idea.user.profile_image %}
+                                    <div class="user-thumbnail-inner-wrapper">
+                                        <div class="user-thumbnail-hover-mask">
+                                        </div>
+                                        <span> {% if idea.user.alias %}
+                                                {{ idea.user.alias }}
+                                            {% else %}
+                                                {{ idea.user.username }}
+                                            {% endif %}
+                                        </span>
+                                        <img alt="" src="{{idea.user.profile_image.url }}"/>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </a>
+                            <div class="thumbnail-caption">
+                                <div class="thumbnail-title">
+                                    <span class="title">
+                                        {{idea.title}}
+                                    </span>
+                                </div>
+                                <div class="thumbnail-category">
+                                    <span class="category">
+                                        dummy_category
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="thumbnail-meta">
+                                <div class="thumbnail-likes">
+                                    <i class="fa fa-thumbs-o-up fa-lg"></i>
+                                    <span class="current-funding-likes">
+                                        {% if not idea.get_current_progress %}
+                                             0 
+                                        {% else %}
+                                           {{idea.get_current_progress}}
+                                        {% endif %}
+                                    </span>
+                                </div>
+                                <div class="thumbnail-funded">
+                                    <i class="fa fa-users fa-lg"></i>
+                                    <span class="current-funding-info">
+                                        {{idea.get_current_funders}}
+                                    </span>
+                                </div>
+                                <div class="thumbnail-days-left">
+                                    <i class="fa fa-clock-o fa-lg"></i>
+                                    <span class="current-funding-status">
+                                    {% if idea.is_past %}
+                                        종료({{idea.get_time_left}})
+                                    {% else %}
+                                        {{idea.get_time_left}}
+                                    {% endif %}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="thumbnail-progress">
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{idea.get_current_progress}}" aria-valuemin="0" aria-valuemax="100" style="width:{{idea.get_current_progress}}%;">
+                                        <span class="sr-only">{{idea.get_current_progress}}% Complete</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+        </div>
+        <div class="col-md-4 col-xs-12">
+            <div class="row">
+                <div class="col-xs-12 col-md-offset-1 col-md-10">
+                    <div class="thumbnail profile">
+                        <div class="thumbnail-image-wrapper">
+                            {% if user.profile_image %}
+                            <img class="round" src="{{ user.profile_image.url }}" alt="{{user.username}}님의 프로필 사진"/>
+                            {% else %}
+                            {% endif %}
+                        </div>
+                        <div class="caption">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="user-basic">
+                                        <h4>
+                                            {% if user.alias %}
+                                                {{user.alias}}
+                                            {% else %}
+                                                {{user.username}}
+                                            {% endif %}
+                                        </h4>
+                                        <div class="user-level">
+                                            <h5>level 1
+                                                <i class="fa fa-certificate"></i>
+                                                {% if user.is_phonenumber_verified %}
+                                                <i class="fa fa-mobile fa-lg"></i>
+                                                {% endif %}
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="contact-basic">
+                                        <a href="{% url 'profile-modify' user.username %}" class="btn btn-primary">
+                                            <h5><i class="fa fa-wrench"></i>프로필 수정
+                                            </h5>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="contact-basic">
+                                        {% if not user.is_phonenumber_verified %}
+                                        <a href="" data-toggle="modal" data-target="#phone-verify" class="btn btn-primary">
+                                            <h5><i class="fa fa-mobile fa-lg"></i>연락처 인증
+                                            </h5>
+                                        </a>
+                                        {% else %}
+                                        <a href="" data-toggle="modal" data-target="#phone-verify" class="btn btn-primary disabled">
+                                            <h5><i class="fa fa-mobile fa-lg"></i>연락처 인증 완료
+                                            </h5>
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</section>
+<!-- Phone verification Modal -->
+<div class="modal fade" id="phone-verify" tabindex="-1" role="dialog" aria-labelledby="PhoneVerifyModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">연락처 인증</h4>
+      </div>
+      <div class="modal-body">
+          <form method="post" action="{% url 'verify-phone' %}">
+            {% csrf_token %}
+            <input id="phonenumber" value="{{ user.phonenumber }}" name="phone" class="text" type="text">
+            <input id="phonenumber-submit" class="submit btn btn-primary" name="submit" type="submit" value="인증받기">
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
