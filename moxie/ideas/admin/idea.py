@@ -8,6 +8,7 @@ from ideas.models import Idea
 class IdeaModelAdmin(SummernoteModelAdmin):
 
     list_display = admin.ModelAdmin.list_display + (
+        'category',
         'title',
 
         'description',

@@ -2,11 +2,16 @@ from django.conf import settings
 from django.db import models
 from django.db.models import Sum
 from django.core.urlresolvers import reverse
-
 from django.contrib.auth.models import User
 
 
 class Idea(models.Model):
+
+    category = models.ForeignKey(
+        'Category',
+        null=True,
+        blank=True,
+    )
 
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
