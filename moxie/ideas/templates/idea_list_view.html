@@ -30,103 +30,82 @@ Explore
                 </div>
                 <div class="row">
                     {% for idea in ideas %}
-                    <div class="col-xs-6 col-md-4">
+                    <div class="col-xs-12 col-sm-6 col-md-6 list-grid">
+                        <div class="thumbnail">
                         <a class="thumbnail-wrapper" href="{% url 'idea-detail' idea.custom_slug %}">
-                            <div class="thumbnail list">
-                                <div class="thumbnail-image-wrapper">
-                                    <img class="detail-thumbnail" src="{{ idea.thumbnail_image.url }}" alt="{{idea.title}}"/>
-                                    <div class="thumbnail-image-label">
-                                        {% if idea.is_past %}
-                                            <span class="label label-finished">종료</span>
-                                        {% else %}
-                                            <span class="label label-ongoing">진행중</span>
-                                        {% endif %}
-                                    </div>
+                            <div class="thumbnail-image" style="background: url({{idea.thumbnail_image.url}}); background-size: cover; background-repeat: no-repeat; background-position: center center;">
+                                <div class="status-label">
+                                    {% if idea.is_past %}
+                                        <span class="label label-finished">종료</span>
+                                    {% else %}
+                                        <span class="label label-ongoing">진행중</span>
+                                    {% endif %}
                                 </div>
-                                
-                                <div class="caption">
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <div class="basic-info">
-                                                <span class="title">
-                                                    {{idea.title}}
-                                                </span>
-                                                <span class="category">
-                                                    dummy_category
-                                                </span>
-                                            </div>
+                                <div class="user-thumbnail">
+                                    {% if idea.user.profile_image %}
+                                    <div class="user-thumbnail-inner-wrapper">
+                                        <div class="user-thumbnail-hover-mask">
                                         </div>
+                                        <span> {% if idea.user.alias %}
+                                                {{ idea.user.alias }}
+                                            {% else %}
+                                                {{ idea.user.username }}
+                                            {% endif %}
+                                        </span>
+                                        <img alt="" src="{{idea.user.profile_image.url }}"/>
                                     </div>
-                                </div>
-                                    
-                                
-                                <div class="caption">
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <div class="basic-funding-info">
-                                                <div class="current-funding-info">
-                                                    <i class="fa fa-users fa-lg"></i>
-                                                    <span class="current-funding-info">
-                                                        {{idea.get_current_funders}}
-                                                    </span>
-                                                </div>
-                                                <div class="current-funding-status">
-                                                    <i class="fa fa-thumbs-o-up fa-lg"></i>
-                                                    <span class="current-funding-likes">
-                                                        {% if not idea.get_current_progress %}
-                                                             0 
-                                                        {% else %}
-                                                           {{idea.get_current_progress}}
-                                                        {% endif %}
-                                                    </span>
-                                                </div>
-                                                <div class="current-funding-timeleft">
-                                                    <i class="fa fa-clock-o fa-lg"></i>
-                                                    <span class="current-funding-status">
-                                                    {% if idea.is_past %}
-                                                        종료({{idea.get_time_left}})
-                                                    {% else %}
-                                                        {{idea.get_time_left}}
-                                                    {% endif %}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="caption">
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <div class="basic-info">
-                                                <div class="user-info">
-                                                    <div class="profile-image">
-                                                        <div class="thumbnail">
-                                                            {% if idea.user.profile_image %}
-                                                            <img alt="" src="{{idea.user.profile_image.url }}"/>
-                                                            {% endif %}
-                                                        </div>
-                                                    </div>
-                                                    <div class="posted-by">
-                                                        <span class="posted-by">
-                                                            {{idea.user.username }}
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <div class="progress">
-                                            <div class="progress-bar" role="progressbar" aria-valuenow="{{idea.get_current_progress}}" aria-valuemin="0" aria-valuemax="100" style="width:{{idea.get_current_progress}}%;">
-                                                <span class="sr-only">{{idea.get_current_progress}}% Complete</span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </a>
+                            <div class="thumbnail-caption">
+                                <div class="thumbnail-title">
+                                    <span class="title">
+                                        {{idea.title}}
+                                    </span>
+                                </div>
+                                <div class="thumbnail-category">
+                                    <span class="category">
+                                        dummy_category
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="thumbnail-meta">
+                                <div class="thumbnail-likes">
+                                    <i class="fa fa-thumbs-o-up fa-lg"></i>
+                                    <span class="current-funding-likes">
+                                        {% if not idea.get_current_progress %}
+                                             0 
+                                        {% else %}
+                                           {{idea.get_current_progress}}
+                                        {% endif %}
+                                    </span>
+                                </div>
+                                <div class="thumbnail-funded">
+                                    <i class="fa fa-users fa-lg"></i>
+                                    <span class="current-funding-info">
+                                        {{idea.get_current_funders}}
+                                    </span>
+                                </div>
+                                <div class="thumbnail-days-left">
+                                    <i class="fa fa-clock-o fa-lg"></i>
+                                    <span class="current-funding-status">
+                                    {% if idea.is_past %}
+                                        종료({{idea.get_time_left}})
+                                    {% else %}
+                                        {{idea.get_time_left}}
+                                    {% endif %}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="thumbnail-progress">
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{idea.get_current_progress}}" aria-valuemin="0" aria-valuemax="100" style="width:{{idea.get_current_progress}}%;">
+                                        <span class="sr-only">{{idea.get_current_progress}}% Complete</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     {% endfor %}
                 </div>

@@ -1,4 +1,105 @@
 //detail view main image full width
+i::before
+  display: flex
+  justify-content: center
+  align-items: center
+
+@mixin thumbnail-meta-elements
+  width: 33.3%
+  i
+    width: 50%
+  span
+    width: 50%
+
+.list-grid
+  .thumbnail
+    border-radius: 0
+    margin-bottom: 15px
+    overflow: hidden 
+    .thumbnail-image
+      position: relative
+      height: 300px
+      .status-label
+        span
+          display: inline-block
+          font-size: 1em
+          margin: 5px
+      .user-thumbnail
+        position: absolute
+        width: 25%
+        bottom: 0
+        right: 0
+        transform: translate(-15%, 50%)
+        .user-thumbnail-inner-wrapper
+          position: relative
+          width: 100%
+          height: 100%
+          &:hover>.user-thumbnail-hover-mask
+            background: rgba($primary-color, 0.7)
+          &:hover>span
+            visibility: visible
+          .user-thumbnail-hover-mask
+            z-index: 5
+            position: absolute
+            width: 100%
+            height: 100%
+            background: rgba($primary-color, 0)
+            border-radius: 50%
+            transition: 0.3s all linear
+          img
+            position: relative
+            width: 100%
+            border-radius: 50%
+            background: $primary-color
+          span
+            visibility: hidden
+            position: absolute
+            width: 100%
+            text-align: center
+            top: 50%
+            left: 50%
+            transform: translate(-50%, -50%)
+            z-index: 10
+            color: $secondary-color
+            font-weight: 400
+    .thumbnail-caption
+      width: 75%
+      overflow: hidden
+      padding: 15px
+      .thumbnail-title
+        height: 100px
+        min-height: 100px
+        max-height: 100px
+        span
+          font-size: 1.2em
+          font-weight: 500
+      .thumbnail-category
+        span
+          color: lighten($primary-color, 30%)
+    .thumbnail-meta
+      height: 20px
+      min-height: 20px
+      max-height: 20px
+      overflow: hidden
+      display: flex
+      flex-wrap: nowrap
+      margin: 10px 0
+      padding: 0 10px
+      .thumbnail-likes
+        @include thumbnail-meta-elements
+      .thumbnail-funded
+        @include thumbnail-meta-elements
+      .thumbnail-days-left
+        @include thumbnail-meta-elements
+    .thumbnail-progress
+      .progress
+        margin-bottom: 0px
+
+.thumbnail
+  border-radius: 0
+  margin-bottom: 15px
+  overflow: hidden 
+
 .thumbnail
   &>img
     width: 100%
@@ -21,16 +122,9 @@
   color: $primary-color
 
 .thumbnail
-  border-radius: 0
   padding: 0
-  overflow: hidden
   .thumbnail-image-wrapper
     overflow: hidden
-    &>img.detail-thumbnail
-      transition: all 0.15s linear
-  &:hover img.detail-thumbnail
-    transform: scale(1.05)
-
 
 //a tag wraps the whole thumbnail
 a.thumbnail-wrapper
