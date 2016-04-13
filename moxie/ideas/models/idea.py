@@ -71,6 +71,8 @@ class Idea(models.Model):
 
     @property
     def get_current_progress(self):
+        if self.get_current_quantity is None:
+            return 0
         return int(self.get_current_quantity/self.sales_goal*100)
 
     @property
