@@ -10,12 +10,49 @@
 
 
 .idea-status
+  margin-bottom: 15px
+  padding: 10px
+  &>div
+    text-align: center
   span
     text-align: center
-    font-size: 1.4em
+    font-size: 1.4rem
     font-family: $font-family-sans-serif
     font-weight: 300
+    letter-spacing: 0.2em
+  span.highlight
+    font-size: 2em
+    color: lighten($primary-color, 50%)
+    
   .funded-by
   .idea-price
+    margin-top: 15px
   .idea-sales
   .sales-goal
+
+.tab-content
+  margin-top: 20px
+
+.description
+  li
+    width: 50%
+    span
+      font-weight: 400
+      letter-spacing: 0.2em
+      font-size: 1em
+    a
+      width: 100%
+      text-align: center
+
+#comment-box
+  padding: 15px
+  .commentForm
+    margin-top: 15px
+    display: flex
+    textarea
+      max-height: 50px
+
+.caption.notify
+  padding: 5px 15px
+  width: 100%
+  margin-bottom: 15px

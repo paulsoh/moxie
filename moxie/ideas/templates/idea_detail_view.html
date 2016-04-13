@@ -5,7 +5,10 @@
 {% endblock %}
 {% block content %}
 {% load pipeline %}
+{% load staticfiles %}
 {% javascript 'detail' %}
+{% javascript 'react' %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
 <section>
     <div class="container">
         <div class="row">
@@ -30,41 +33,54 @@
                 <div class="thumbnail m-detail-thumbnail">
                     <img src="{{ idea.thumbnail_image.url }}" alt="{{idea.title}}"/>
                 </div>
-                {{ idea.description|safe }}
+                
+                <div class="description">
+                  <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#description" aria-controls="description" role="tab" data-toggle="tab"><span>아이디어 설명</span></a></li>
+                        <li role="presentation"><a href="#comments" aria-controls="comments" role="tab" data-toggle="tab"><span>댓글</span></a></li>
+                    </ul>
+
+                </div> 
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="description">
+                        {{ idea.description|safe }}
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="comments" >
+                        <div id="comment-box" data-idea-id={{idea.custom_slug}}>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
             <div class="col-xs-12 col-md-4">
                 <div class="thumbnail">
                     <div class="caption">
-                        <div class="category">
-                            <span>
-                                {{idea.category.name}}
-                            </span>
-                        </div>
                         <div class="idea-status">
                             <div class="funded-by">
-                                <span>
-                                    Funded by 
-                                    <span id="current_funders">
-                                        {{idea.get_current_funders}}
-                                    </span>
-                                </span>
                             </div>
-                            <div class="idea-price">
+                            <div class="sales-goal">
                                 <span>
-                                    Price: {{ idea.price }}
+                                    <span class="highlight">
+                                        {{ idea.sales_goal }}
+                                    </span>
+                                    개 펀딩 목표로
                                 </span>
                             </div>
                             <div class="idea-sales">
                                 <span>
-                                    Current sales:
-                                    <span id="current_quantity">
+                                    <span class="highlight" id="current_quantity">
                                         {{ idea.get_current_quantity }}
                                     </span>
+                                    개 진행중
                                 </span>
                             </div>
-                            <div class="sales-goal">
+                            <div class="idea-price">
                                 <span>
-                                    Sales goal: {{ idea.sales_goal }}
+                                    <span class="highlight">
+                                        {{ idea.price }}
+                                    </span>
+                                원
                                 </span>
                             </div>
                         </div>
@@ -75,13 +91,11 @@
                         </div>
                         <p>End date: {{ idea.end_date }}</p>
                         <div id="toggle-field">
-                            <div class="thumbnail">
-                                <div class="caption">
-                                    <h4>{% if user.alias %} {{user.alias}} {%else %} {{user.username}}{% endif %}님,</br> MOXIE LAB에서는 결제기능을 지원하지 않습니다.</h4> 
-                                    <h5>
-                                        아래 정보를 기입해주시면, 최소 구매 필요 인원 달성시 판매자에게 전달됩니다
-                                    </h5>
-                                </div>
+                            <div class="caption notify">
+                                <h4>{% if user.alias %} {{user.alias}} {%else %} {{user.username}}{% endif %}님,</br> MOXIE LAB에서는 현재 결제 기능을 지원하지 않습니다.</h4> 
+                                <h5>
+                                    아래 정보를 기입해주시면, 최소 구매 필요 인원 달성시 판매자에게 전달됩니다
+                                </h5>
                             </div>
                             {% if user.is_authenticated %}
                             <form class="form-horizontal">
@@ -204,5 +218,5 @@
         </div>
     </div>
 </section>
-
+<script src="{% static 'js/comment.js' %}" type="text/babel"></script>
 {% endblock %}
