@@ -5,28 +5,25 @@ from django.core.urlresolvers import reverse
 from django.contrib import messages
 
 
-class ProfileTemplateView(DetailView):
-
+class ProfileBaseView(DetailView):
     model = get_user_model()
+    context_object_name = 'user'
+    slug_field = 'username'
+
+
+class ProfileTemplateView(ProfileBaseView):
+
     template_name = "profile.html"
-    context_object_name = 'user'
-    slug_field = 'username'
 
 
-class ProfileDashboardTemplateView(DetailView):
+class ProfileDashboardTemplateView(ProfileBaseView):
 
-    model = get_user_model()
     template_name = "profile_dashboard.html"
-    context_object_name = 'user'
-    slug_field = 'username'
 
 
-class ProfileUpdateTemplateView(DetailView):
+class ProfileUpdateTemplateView(ProfileBaseView):
 
-    model = get_user_model()
     template_name = "profile_modify.html"
-    context_object_name = 'user'
-    slug_field = 'username'
 
     def post(self, request, *args, **kwargs):
         user = get_object_or_404(
