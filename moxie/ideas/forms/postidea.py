@@ -13,6 +13,7 @@ class PostIdeaForm(ModelForm):
         super(PostIdeaForm, self).__init__(*args, **kwargs)
 
         self.fields['title'].label = "아이디어 제목"
+        self.fields['category'].label = "아이디어 카테고리"
         self.fields['thumbnail_image'].label = "대표 이미지"
         self.fields['price'].label = "판매 가격"
         self.fields['sales_goal'].label = "목표 판매량"
@@ -28,6 +29,7 @@ class PostIdeaForm(ModelForm):
                     <h3>기본 정보</h3>
                 """),
                 Field('title'),
+                Field('category'),
                 Field('thumbnail_image'),
                 css_id='step-1',
             ),
@@ -72,6 +74,7 @@ class PostIdeaForm(ModelForm):
         model = Idea
         fields = [
             'title',
+            'category',
             'thumbnail_image',
             'description',
             'price',
