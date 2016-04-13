@@ -10,6 +10,8 @@ from user.views import *
 from api.ideas.views import *
 
 urlpatterns = [
+    url(r'^api/ideas/explore/$', IdeaListAPIView.as_view(), name="api-idea"),
+
     url(r'^auth/verify/phonenumber/(?P<slug>\w+)/$', UserVerifyPhoneView.as_view(), name="verify-phone-result"),
     url(r'^auth/verify/phonenumber/$', UserVerifyPhoneView.as_view(), name="verify-phone"),
     url(r'^ideas/explore/(?P<pk>\d+)/fund/$', FundIdeaAPIView.as_view(), name="idea-fund"),
