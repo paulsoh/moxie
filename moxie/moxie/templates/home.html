@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load pipeline %}
+{% load staticfiles %}
 <section class="container-fluid">
     <div class="row">
         <ul id="scroller">
@@ -34,9 +36,10 @@
             아이디어를 세상과 공유하세요
         </h3>
     </div>
+    <div class="row">
+    </div>
     
 </section>
-
 <script type="text/javascript">
 (function($){
         $(function() { //on DOM ready 
