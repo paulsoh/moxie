@@ -35,10 +35,18 @@
             <div class="col-xs-12 col-md-4">
                 <div class="thumbnail">
                     <div class="caption">
+                        <div class="category">
+                            <span>
+                                {{idea.category.name}}
+                            </span>
+                        </div>
                         <div class="idea-status">
                             <div class="funded-by">
                                 <span>
-                                    Funded by {{idea.get_current_funders}}
+                                    Funded by 
+                                    <span id="current_funders">
+                                        {{idea.get_current_funders}}
+                                    </span>
                                 </span>
                             </div>
                             <div class="idea-price">
@@ -48,7 +56,10 @@
                             </div>
                             <div class="idea-sales">
                                 <span>
-                                    Current sales:{{ idea.get_current_quantity }}
+                                    Current sales:
+                                    <span id="current_quantity">
+                                        {{ idea.get_current_quantity }}
+                                    </span>
                                 </span>
                             </div>
                             <div class="sales-goal">
