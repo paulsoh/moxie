@@ -18,7 +18,26 @@ Explore
 <section>
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-md-9">
+            <div class="col-xs-12 col-md-3 col-md-push-9">
+                <div class="categories">
+                    <h2>Categories</h2>
+                    <a href="{% url 'idea-list' %}">
+                        <p>
+                            전체보기
+                        </p>
+                    </a>
+                    
+                    {% for category in categories %}
+                    <a href="{% url 'category' category.slug %}">
+                        <p>
+                            {{ category.name }}
+                        </p>
+                    </a>
+                    
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-9 col-md-pull-3">
                 <div class="row">
                     <div class="col-xs-12">
                         <ul class="nav nav-pills">
@@ -66,7 +85,7 @@ Explore
                                 </div>
                                 <div class="thumbnail-category">
                                     <span class="category">
-                                        dummy_category
+                                        {{idea.category.name}}
                                     </span>
                                 </div>
                             </div>
@@ -109,32 +128,6 @@ Explore
                     </div>
                     {% endfor %}
                 </div>
-            </div>
-            <div class="col-xs-12 col-md-3">
-                <h2>Categories</h2>
-                <p>Dummy category</p>
-                <p>Dummy category</p>
-                <p>Dummy category</p>
-                <p>Dummy category</p>
-                <p>Dummy category</p>
-                <p>Dummy category</p>
-                <p>Dummy category</p>
-                <p>Dummy category</p>
-                <p>Dummy category</p>
-                <p>Dummy category</p>
-                <p>Dummy category</p>
-                <p>Dummy category</p>
-                <p>Dummy category</p>
-                <p>Dummy category</p>
-                <p>Dummy category</p>
-                <p>Dummy category</p>
-                <p>Dummy category</p>
-                <p>Dummy category</p>
-                <p>Dummy category</p>
-                <p>Dummy category</p>
-                <p>Dummy category</p>
-                <p>Dummy category</p>
-                <p>Dummy category</p>
             </div>
         </div>
 
