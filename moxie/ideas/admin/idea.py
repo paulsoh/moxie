@@ -2,6 +2,7 @@ from django.contrib import admin
 from django_summernote.admin import SummernoteModelAdmin
 
 from ideas.models import Idea
+from .comment import CommentTabularInline
 
 
 @admin.register(Idea)
@@ -17,4 +18,8 @@ class IdeaModelAdmin(SummernoteModelAdmin):
         'sales_goal',
         '_created_at',
         '_updated_at',
+    )
+
+    inlines = (
+        CommentTabularInline,
     )

@@ -25,6 +25,9 @@ urlpatterns = [
 
     url(r'^ideas/explore/(?P<slug>\S+)/update/$', IdeaUpdateView.as_view(), name="idea-update"),
     url(r'^ideas/explore/(?P<slug>\S+)/admin/$', IdeaAdminTemplateView.as_view(), name="idea-admin"),
+
+    url(r'^ideas/explore/(?P<slug>\S+)/comment/$', CommentIdeaAPIView.as_view(), name="idea-comment"),
+
     url(r'^ideas/explore/(?P<slug>\S+)/$', IdeaDetailView.as_view(), name="idea-detail"),
     url(r'^ideas/explore/$', IdeaListView.as_view(), name="idea-list"),
     url(r'^ideas/create/$', IdeaCreateView.as_view(), name="idea-create"),

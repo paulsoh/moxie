@@ -46,6 +46,20 @@ PIPELINE = {
             ),
             'output_filename': 'js/vendor.js',
         },
+        'react': {
+            'source_filenames': (
+              'js/vendor/react.js',
+              'js/vendor/react-dom.js',
+              'js/vendor/browser.min.js',
+            ),
+            'output_filename': 'js/react.js',
+        },
+        'react_myApp': {
+            'source_filenames': (
+              'js/comment.js',
+            ),
+            'output_filename': 'js/comment.js',
+        },
         'plugins': {
             'source_filenames': (
               'js/vendor/jquery.simplyscroll.js',
