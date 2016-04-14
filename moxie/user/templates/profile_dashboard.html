@@ -55,7 +55,7 @@
                     {% for idea in user.idea_set.all %}
                     <div class="col-xs-12 col-sm-6 col-md-6 list-grid">
                         <div class="thumbnail">
-                        <a class="thumbnail-wrapper" href="{% url 'idea-detail' idea.custom_slug %}">
+                        <a class="thumbnail-wrapper" href="{% url 'idea-admin' idea.custom_slug %}">
                             <div class="thumbnail-image" style="background: url({{idea.thumbnail_image.url}}); background-size: cover; background-repeat: no-repeat; background-position: center center;">
                                 <div class="status-label">
                                     {% if idea.is_past %}
@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="thumbnail-category">
                                     <span class="category">
-                                        dummy_category
+                                        {{idea.category.name}}
                                     </span>
                                 </div>
                             </div>
