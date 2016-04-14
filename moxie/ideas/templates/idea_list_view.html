@@ -19,7 +19,7 @@ Explore
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-md-3 col-md-push-9">
-                <div class="categories">
+                <div class="categories hidden-xs">
                     <h2>Categories</h2>
                     <a href="{% url 'idea-list' %}">
                         <p>
@@ -103,7 +103,11 @@ Explore
                                 <div class="thumbnail-funded">
                                     <i class="fa fa-users fa-lg"></i>
                                     <span class="current-funding-info">
-                                        {{idea.get_current_funders}}
+                                        {% if not idea.get_current_funders %}
+                                             0 
+                                        {% else %}
+                                           {{idea.get_current_funders}}
+                                        {% endif %}
                                     </span>
                                 </div>
                                 <div class="thumbnail-days-left">
