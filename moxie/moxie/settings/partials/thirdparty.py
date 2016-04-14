@@ -1,4 +1,5 @@
 import os
+import raven
 # django-crispy-forms settings
 # CRISPY_TEMPLATE_PACK = 'bootstrap3'
 CRISPY_FAIL_SILENTLY = not True
@@ -35,4 +36,11 @@ SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 FACEBOOK_EXTENDED_PERMISSIONS = ['picture']
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
     'fields': 'id, name, email, age_range'
+}
+
+RAVEN_CONFIG = {
+    'dsn': 'https://df4f30e86fb14584854a466b7d64398d:9512bdb4f27f491488f1a0cae77b854e@app.getsentry.com/74130',
+    # If you are using git, you can also automatically configure the
+    # release based on the git info.
+    # 'release': raven.fetch_git_sha(os.path.dirname(__file__)),
 }

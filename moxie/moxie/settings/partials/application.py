@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'django_summernote',
     'crispy_forms',
     'social.apps.django_app.default',
+    'raven.contrib.django.raven_compat',
 
     'user',
     'moxie',
