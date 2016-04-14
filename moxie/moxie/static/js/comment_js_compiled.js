@@ -112,7 +112,7 @@
                 width: 64,
                 borderRadius: 50,
                 backgroundSize: 'cover',
-                backgroundImage: 'url(' + this.props.src + ')'
+                backgroundImage: 'url(' + "https://moxie.kr/"+this.props.src + ')'
             };
             return React.createElement(
                 'div',
@@ -166,7 +166,7 @@
 
         loadCommentsFromServer: function loadCommentsFromServer() {
             $.ajax({
-                url: this.props.url + "/",
+                url: "https://moxie.kr/"+this.props.url + "/",
                 dataType: 'json',
                 cache: false,
                 success: function (data) {
@@ -181,7 +181,7 @@
         },
         handleCommentSubmit: function handleCommentSubmit(comment) {
             $.ajax({
-                url: this.props.url + "/",
+                url: "https://moxie.kr/"+ this.props.url + "/",
                 dataType: 'json',
                 type: 'POST',
                 data: comment,
