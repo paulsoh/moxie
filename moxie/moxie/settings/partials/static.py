@@ -23,7 +23,6 @@ PIPELINE = {
             'source_filenames': (
                 'css/vendor/bootstrap.min.css',
                 'css/vendor/jquery.simplyscroll.css',
-                'css/vendor/font-awesome.min.css',
                 'css/vendor/bootstrap-social.css',
                 'css/vendor/fileinput.min.css',
                 'css/vendor/slider.css',
@@ -35,7 +34,7 @@ PIPELINE = {
             'source_filenames': (
                 'sass/moxie.sass',
             ),
-            'output_filename': 'css/moxie.min.css',
+            'output_filename': 'css/moxie.css',
         },
     },
 

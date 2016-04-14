@@ -29,6 +29,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'pipeline',
+    'storages',
     'django_summernote',
     'crispy_forms',
     'social.apps.django_app.default',
@@ -76,7 +77,7 @@ WSGI_APPLICATION = 'moxie.wsgi.application'
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'JAPAN'
+TIME_ZONE = 'Asia/Seoul'
 
 USE_I18N = True
 
