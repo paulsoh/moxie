@@ -14,8 +14,8 @@ header
 
   .m-carousel-thumbnail-hover
     position: absolute
-    height: 400px
-    width: 600px 
+    height: 320px
+    width: 480px 
     top: 0
     left: 0
     z-index: 5
@@ -23,8 +23,8 @@ header
     &:hover 
       background: rgba(0,0,0,0.2)
     &:hover+.m-carousel-caption
-      &>h4 
-        color: $primary-color
+      &>h5
+        color: white
       &>a.btn.btn-primary
         display: block
         width: 75%
@@ -36,10 +36,10 @@ header
   .m-carousel-caption
     position: absolute
     bottom: 0px
-    left: 300px
+    left: 240px
     z-index: 10
     transform: translate(-50%, -50%)
-    h4
+    h5
       color: white
     a.btn.btn-primary
       display: block
@@ -50,8 +50,8 @@ header
       max-height: 0px
       transition: 0.2s all linear
     &:hover
-      &>h4 
-        color: $primary-color
+      &>h5
+        color: white
       &>a.btn.btn-primary
         max-height: 100px
         padding: 6px 12px

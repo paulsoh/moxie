@@ -70,7 +70,11 @@
                             <div class="idea-sales">
                                 <span>
                                     <span class="highlight" id="current_quantity">
-                                        {{ idea.get_current_quantity }}
+                                        {% if not idea.get_current_quantity %}
+                                             0 
+                                        {% else %}
+                                            {{ idea.get_current_quantity }}
+                                        {% endif %}
                                     </span>
                                     개 진행중
                                 </span>

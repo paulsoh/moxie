@@ -6,8 +6,8 @@
     <div class="row">
         <ul id="scroller">
             {% for idea in ideas %}
-            <li>
-                <div class="m-carousel-thumbnail-wrapper">
+            <li style="height: 320px; width: 480px">
+                <div style="height: 100%; width: 100%; background-image: url({{idea.thumbnail_image.url}}); background-size: cover;" class="m-carousel-thumbnail-wrapper">
                     <div class="m-carousel-thumbnail-hover">
                     </div>
                     <div class="m-carousel-caption">
@@ -17,11 +17,8 @@
                         <a href="{% url 'idea-detail' idea.custom_slug %}" class="btn btn-primary" role="button">
                             보러가기
                         </a>
-
-                        
                     </div>
-                    <div class="m-carousel-thumbnail">
-                        <img src="{{ idea.thumbnail_image.url }}">
+                    <div class="m-carousel-thumbnail-hover">
                     </div>
                 </div>
             </li>
