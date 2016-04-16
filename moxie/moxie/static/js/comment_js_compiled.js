@@ -112,7 +112,7 @@
                 width: 64,
                 borderRadius: 50,
                 backgroundSize: 'cover',
-                backgroundImage: 'url(' + "https://moxie.kr/"+this.props.src + ')'
+                backgroundImage: 'url(' + this.props.src + ')'
             };
             return React.createElement(
                 'div',
@@ -166,7 +166,7 @@
 
         loadCommentsFromServer: function loadCommentsFromServer() {
             $.ajax({
-                url: "https://moxie.kr/"+this.props.url + "/",
+                url: this.props.url + "/",
                 dataType: 'json',
                 cache: false,
                 success: function (data) {
@@ -181,7 +181,7 @@
         },
         handleCommentSubmit: function handleCommentSubmit(comment) {
             $.ajax({
-                url: "https://moxie.kr/"+ this.props.url + "/",
+                url: this.props.url + "/",
                 dataType: 'json',
                 type: 'POST',
                 data: comment,
@@ -212,10 +212,10 @@
         }
     });
 
-    var idea_url = "https://moxie.kr/ideas/explore/" + $('#comment-box').data('idea-id') + "/comment";
+    var idea_url = "/ideas/explore/" + $('#comment-box').data('idea-id') + "/comment";
 
     $(document).ready(function () {
 
-        ReactDOM.render(React.createElement(CommentBox, { url: idea_url, pollInterval: 1000 }), document.getElementById('comment-box'));
+        ReactDOM.render(React.createElement(CommentBox, { url: idea_url, pollInterval: 1500 }), document.getElementById('comment-box'));
     });
 })();
