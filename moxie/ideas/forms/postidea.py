@@ -28,8 +28,8 @@ class PostIdeaForm(ModelForm):
                 HTML("""
                     <h3>기본 정보</h3>
                 """),
-                Field('title'),
-                Field('category'),
+                Field('title', css_class="form-control"),
+                Field('category', css_class="form-control"),
                 Field('thumbnail_image'),
                 css_id='step-1',
             ),
@@ -37,29 +37,32 @@ class PostIdeaForm(ModelForm):
                 HTML("""
                     <h3>아이디어 기본 정보</h3>
                 """),
-                'price',
+                Field('price', css_class="form-control"),
                 HTML("""
-                <input type="text" id="price-slider" class="span2" \
+                <input type="text" id="price-slider" class="span2 form-control" \
                         data-slider-min="1000" data-slider-max="250000" \
                         data-slider-step="1000">
                 """),
-                'sales_goal',
+                Field('sales_goal', css_class="form-control"),
                 HTML("""
-                <input type="text" id="goal-slider" class="span2" \
+                <input type="text" id="goal-slider" class="span2 form-control" \
                         data-slider-min="20" data-slider-max="200" \
                         data-slider-step="5">
                 """),
                 HTML("""
                 <div id="expected-sales">예상 매출:</div>
                 """),
-                'end_date',
+                Field('end_date', css_class="form-control"),
                 css_id='step-2',
             ),
             Div(
                 HTML("""
                     <h3>아이디어 상세 설명</h3>
                 """),
-                'custom_slug',
+                Field('custom_slug', css_class="form-control"),
+                HTML("""
+                    <p>올바른 URL형태로 입력해주세요. 입력하지 않으시면 자동으로 생성됩니다.</p>
+                """),
                 'description',
                 css_id='step-3',
             ),
