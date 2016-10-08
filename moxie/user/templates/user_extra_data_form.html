@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Sign up
+{% endblock %}
+
+{% block content %}
+<section id="signupform" class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-xs-8 col-xs-offset-2">
+            <h3 class="page-header list-hero">
+                {{facebook_user.username}}님, 반갑습니다</br>
+                원할한 서비스 이용을 위해</br>
+                아래 추가 정보를 입력해주세요</br>
+            </h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 col-xs-8 col-xs-offset-2">
+            <div class="profile-image-wrapper">
+                <img src="{{profile_url}}" alt="Facebook profile photo">
+            </div>
+            <form method="post" action="/complete/facebook/">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="alias">Moxie에서 사용할 이름을 입력해주세요</label>
+                    <input type="text" class="form-control" id="alias" name="alias" value={{facebook_user.first_name}} required>
+                </div>
+                <div class="form-group">
+                    <label for="email">이메일을 입력해주세요</label>
+                    <input type="text" class="form-control" id="email" name="email" value="{{facebook_user.email}}" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">핸드폰 번호를 입력해주세요</label>
+                    <input type="text" class="form-control" id="phone" name="phone" value="000-0000-0000" required>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="form-control signup-btn" id="submit" value="가입하기">
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

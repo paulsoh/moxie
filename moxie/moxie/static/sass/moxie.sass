@@ -1,0 +1,63 @@
+@import 'partials/variables'
+@import 'partials/typography'
+@import 'partials/layout'
+
+html
+  overflow-y: scroll
+
+//labels for thumbnails
+.label-ongoing, .label-hot
+  background: $primary-color
+.label-finished, .label-success, .label-fail
+  background: $secondary-color
+
+.btn
+  border-radius: 0
+
+.btn-primary
+  background: $primary-color
+  border: 0
+  &:hover
+    background: darken($primary-color, 5%)
+  &:active
+    background: darken($primary-color, 5%)
+
+.progress
+  height: 5px
+  border-radius: 0
+  background: #EEEEEE 
+  &.detail
+    height: 7px
+
+.progress-bar
+  background: $primary-color
+
+//Fund functionality
+#toggle-field
+  max-height: 0
+  overflow: hidden
+  -webkit-transition: all 0.8s linear 
+  transition: all 0.8s linear
+  &.fund-info-input
+    -webkit-transition: all 0.8s linear 
+    transition: all 0.8s linear
+    max-height: 100vh
+
+#toggle-btn-fund
+  margin-bottom: 8px
+
+//Kakao social login
+//To create same hovering effect for kakao
+.btn-kakao.btn-social.btn
+  background: #FFE812
+  color: black
+  &:hover
+    color: black
+  &>.hover-effect
+    height: 100%
+    width: 100%
+    position: absolute
+    top: 0
+    left: 0
+    &:hover
+      background: rgba(0,0,0,0.2)

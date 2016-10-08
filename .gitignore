@@ -60,3 +60,10 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+#Backup files
+*.swp
+*.swo
+
+#Vendor js/css/sass files
+vendor/

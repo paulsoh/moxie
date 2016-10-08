@@ -1,0 +1,42 @@
+@import 'layout/footer'
+@import 'layout/header'
+@import 'layout/main'
+@import 'layout/form'
+@import 'layout/signup'
+@import 'layout/idea_admin'
+@import 'layout/detail'
+@import 'layout/thumbnail'
+@import 'layout/components'
+
+hr.m-seperator
+  border-top: 2px solid $primary-color
+  color: $primary-color
+
+h1.m-detail-hero
+  margin: 25px 
+  text-align: center
+
+.m-header-text
+  text-align: center
+  display: block
+  padding: 15px 0
+  border: 2px solid $primary-color
+  color: $primary-color
+
+img.round
+  border-radius: 50%
+
+.vcenter
+  display: inline-block
+  vertical-align: middle
+  float: none
+
+// overriding bootstrap grid..
+
+.list-grid.col-xs-6:nth-child(2n+1)
+  padding-right: 7.5px
+  padding-left: 15px
+
+.list-grid.col-xs-6:nth-child(2n)
+  padding-left: 7.5px
+  padding-right: 15px

@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {% if user.alias %}
+        {{ user.alias }}
+    {% else %}
+        {{ user.username }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="page-header list-hero">
+                    <h1>
+                        {% if user.alias %}
+                            {{ user.alias }}
+                        {% else %}
+                            {{ user.username }}
+                        {% endif %}
+                        님의 Idea board입니다
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="container">
+    <div class="row">
+        <div class="col-md-8 col-xs-12">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h4>
+                        {% if user.alias %}
+                            {{ user.alias }}
+                        {% else %}
+                            {{ user.username }}
+                        {% endif %}
+                        's ideas - 진행중
+                    </h4>
+                    {% for idea in user.idea_set.all %}
+                    <div class="col-xs-6 col-md-4">
+                        <div class="thumbnail">
+                            <div class="thumbnail-image-wrapper">
+                                <img src="{{ idea.thumbnail_image.url }}" alt="{{idea.title}}"/>
+                                <div class="thumbnail-image-label">
+                                    {% if idea.is_past %}
+                                        <span class="label label-finished">종료</span>
+                                    {% else %}
+                                        <span class="label label-ongoing">진행중</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="caption">
+                                <p class="m-thumbnail-title">
+                                    {{idea.title}}
+                                </p>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{idea.get_current_progress}}" aria-valuemin="0" aria-valuemax="100" style="width:{{idea.get_current_progress}}%;">
+                                        <span class="sr-only">{{idea.get_current_progress}}% Complete</span>
+                                    </div>
+                                </div>
+                                <p>
+                                    Funded by {{idea.get_current_funders}}
+                                </p>
+                                {% if idea.is_past %}
+                                <p>
+                                    종료됨({{idea.get_time_left}})
+                                </p>
+                                {% else %}
+                                <p>
+                                    Time left  {{idea.get_time_left}}
+                                </p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8 col-xs-12">
+                    <h4>
+                        {% if user.alias %}
+                            {{ user.alias }}
+                        {% else %}
+                            {{ user.username }}
+                        {% endif %}
+                        's fundings
+                    </h4>
+                    {% for idea in user.fund_idea_set.all %}
+                    <p>{{ idea.title }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-xs-12">
+            <div class="row">
+                <div class="col-xs-12 col-md-offset-1 col-md-10">
+                    <div class="thumbnail profile">
+                        <div class="thumbnail-image-wrapper">
+                            {% if user.profile_image %}
+                            <img class="round" src="{{ user.profile_image.url }}" alt="{{user.username}}님의 프로필 사진"/>
+                            {% else %}
+                            {% endif %}
+                        </div>
+                        <div class="caption">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="user-basic">
+                                        <h4>
+                                            {% if user.alias %}
+                                                {{user.alias}}
+                                            {% else %}
+                                                {{user.username}}
+                                            {% endif %}
+                                        </h4>
+                                        <div class="user-level">
+                                            <h5>level 1
+                                                <i class="fa fa-certificate"></i>
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="contact-basic">
+                                        {% if user.email %}
+                                        <a href="mailto:{{user.email}}" class="btn btn-primary">
+                                            <h5><i class="fa fa-envelope"></i> 문의하기
+                                            </h5>
+                                        </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</section>
+{% endblock %}

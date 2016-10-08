@@ -1,0 +1,226 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ idea.title }}
+{% endblock %}
+{% block content %}
+{% load pipeline %}
+{% load staticfiles %}
+{% javascript 'detail' %}
+{% javascript 'react' %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="page-header list-hero">
+                    <h1> {{ idea.title }} 
+                    {% if idea.is_past %}
+                        <span class="label label-finished">종료</span>
+                    {% else %}
+                        <span class="label label-ongoing">진행중</span>
+                    {% endif %}
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-8">
+                <div class="thumbnail m-detail-thumbnail">
+                    <img src="{{ idea.thumbnail_image.url }}" alt="{{idea.title}}"/>
+                </div>
+                
+                <div class="description">
+                  <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#description" aria-controls="description" role="tab" data-toggle="tab"><span>아이디어 설명</span></a></li>
+                        <li role="presentation"><a href="#comments" aria-controls="comments" role="tab" data-toggle="tab"><span>댓글</span></a></li>
+                    </ul>
+
+                </div> 
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="description">
+                        {{ idea.description|safe }}
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="comments" >
+                        <div id="comment-box" data-idea-id={{idea.custom_slug}}>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col-xs-12 col-md-4">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <div class="idea-status">
+                            <div class="funded-by">
+                            </div>
+                            <div class="sales-goal">
+                                <span>
+                                    <span class="highlight">
+                                        {{ idea.sales_goal }}
+                                    </span>
+                                    개 펀딩 목표로
+                                </span>
+                            </div>
+                            <div class="idea-sales">
+                                <span>
+                                    <span class="highlight" id="current_quantity">
+                                        {% if not idea.get_current_quantity %}
+                                             0 
+                                        {% else %}
+                                            {{ idea.get_current_quantity }}
+                                        {% endif %}
+                                    </span>
+                                    개 진행중
+                                </span>
+                            </div>
+                            <div class="idea-price">
+                                <span>
+                                    <span class="highlight">
+                                        {{ idea.price }}
+                                    </span>
+                                원
+                                </span>
+                            </div>
+                        </div>
+                        <div class="progress detail">
+                            <div class="progress-bar" role="progressbar" id="current_progress" aria-valuenow="{{idea.get_current_progress}}" aria-valuemin="0" aria-valuemax="100" style="width:{{idea.get_current_progress}}%;">
+                                <span class="sr-only">{{idea.get_current_progress}}% Complete</span>
+                            </div>
+                        </div>
+                        <p>End date: {{ idea.end_date }}</p>
+                        <div id="toggle-field">
+                            <div class="caption notify">
+                                <h4>{% if user.alias %} {{user.alias}} {%else %} {{user.username}}{% endif %}님,</br> MOXIE LAB에서는 현재 결제 기능을 지원하지 않습니다.</h4> 
+                                <h5>
+                                    아래 정보를 기입해주시면, 최소 구매 필요 인원 달성시 판매자에게 전달됩니다
+                                </h5>
+                            </div>
+                            {% if user.is_authenticated %}
+                            <form class="form-horizontal">
+                              <div class="form-group">
+                                <label for="inputName" class="control-label col-sm-2"><i class="fa fa-user fa-lg"></i></label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="funder_name" placeholder="이름">
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                  <label for="inputAddress" class="col-sm-2 control-label "><i class="fa fa-home fa-lg"></i></label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="funder_address" placeholder="주소">
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="inputAddress" class="col-sm-2 control-label"><i class="fa fa-mobile fa-2x"></i></label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" readonly="readonly" id="funder_cellphone" value="{{ user.phonenumber }}" placeholder="전화번호">
+                                </div>
+                                <div class="col-sm-10">
+                                    <div class="detail-phone-validation-wrapper">
+                                        {% if not user.is_phonenumber_verified %}
+                                        <h5>펀딩을 위해서는 연락처 인증이 필요합니다</h5>
+                                        <a class="btn btn-primary" role="button" href=" {% url 'profile-dashboard' user.username %} ">
+                                            인증하러가기
+                                        </a>
+                                        {% else %}
+                                        <h5>연락처 인증이 되었습니다</h5>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="form-group">
+                                <label for="inputQuantity" class="col-sm-2 control-label">수량</label>
+                                <div class="col-sm-10">
+                                  <select class="form-control" id="funder_quantity">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </form>
+                        {% endif %}
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="contact-basic">
+                                {% if user.is_authenticated %}
+                                    {% if user.is_phonenumber_verified %}
+                                    <a id="toggle-btn-fund" class="hidden btn btn-primary" data-idea-id="{{idea.id}}" role="button">구매 신청</a> 
+                                    {% else  %}
+                                    <a id="toggle-btn-fund" class="hidden btn btn-primary disabled" data-idea-id="{{idea.id}}" role="button">구매 신청</a> 
+                                    {% endif %}
+                                    <a id="toggle-btn" class="btn btn-primary" role="button">구매 정보 보기</a> 
+                                {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="thumbnail profile">
+                    <div class="thumbnail-header">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h4>created by</h4>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <a href="{% url 'profile' idea.user.username %}">
+                        <div class="thumbnail-image-wrapper">
+                            {% if idea.user.profile_image %}
+                                <img class="round" src="{{ idea.user.profile_image.url }}" alt="{{idea.user.username}}님의 프로필 사진"/>
+                            {% else %}
+                            {% endif %}
+                        </div>
+                    </a>
+                    <hr>
+                    <div class="caption">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="user-basic">
+                                    <h4>
+                                        {% if idea.user.alias %}
+                                            {{idea.user.alias}}
+                                        {% else %}
+                                            {{idea.user.username}}
+                                        {% endif %}
+                                    </h4>
+                                    <div class="user-level">
+                                        <h5>level 1
+                                            <i class="fa fa-certificate"></i>
+                                            {% if idea.user.is_phonenumber_verified %}
+                                            <i class="fa fa-mobile fa-lg"></i>
+                                            {% endif %}
+                                        </h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="contact-basic">
+                                    {% if idea.user.email %}
+                                    <a href="mailto:{{idea.user.email}}" class="btn btn-primary">
+                                        <h5><i class="fa fa-envelope"></i> 문의하기
+                                        </h5>
+                                    </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="{% static 'js/comment_js_compiled.js' %}" type="text/javascript"></script>
+{% endblock %}

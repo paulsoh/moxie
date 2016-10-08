@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load pipeline %}
+{% load staticfiles %}
+<section class="container-fluid">
+    <div class="row">
+        <ul id="scroller">
+            {% for idea in ideas %}
+            <li style="height: 320px; width: 480px">
+                <div style="height: 100%; width: 100%; background-image: url({{idea.thumbnail_image.url}}); background-size: cover;" class="m-carousel-thumbnail-wrapper">
+                    <div class="m-carousel-thumbnail-hover">
+                    </div>
+                    <div class="m-carousel-caption">
+                        <h5>
+                            {{ idea.title }}
+                        </h5>
+                        <a href="{% url 'idea-detail' idea.custom_slug %}" class="btn btn-primary" role="button">
+                            보러가기
+                        </a>
+                    </div>
+                    <div class="m-carousel-thumbnail-hover">
+                    </div>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>            
+    </div>
+</section>
+
+<section class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-8 col-md-offset-2">
+            <h3 class="m-header-text">
+                아이디어를 세상과 공유하세요
+            </h3>
+        </div>
+        
+    </div>
+    <div class="row">
+    </div>
+    
+</section>
+<script type="text/javascript">
+(function($){
+        $(function() { //on DOM ready 
+            $("#scroller").simplyScroll();
+        });
+})(jQuery);
+</script>
+
+{% endblock %}
